@@ -1,3 +1,8 @@
+
+unsigned char iphoneData[10];
+int index = 0;
+char mobileMode = -1; // 0 is iphone,1 is android
+
 void setup() {
     Serial.begin(115200);               //initial the Serial
     pinMode(13,OUTPUT);
@@ -5,20 +10,41 @@ void setup() {
 
 void loop()
 {
-    if(Serial.available())
+   mobileControl(); 
+}
+
+
+void mobileControl(){
+  if(Serial.available())
     {
-        //Serial.write(Serial.read());    //send what has been received
-        char incomingByte = Serial.read();
-        if(incomingByte == 1){
-          digitalWrite(13,HIGH);
-          
-        }else if (incomingByte == 0){
-          digitalWrite(13,LOW);
-          
+        
+        unsigned char incomingByte = Serial.read();
+        // set iphone mode or android mode
+        
+        if(incomingByte == 99){
+          mobileMode = 0;
         }
-        Serial.write(incomingByte);
-        Serial.println(incomingByte);
+
+        if(incomingByte == 100){ 
+            if (mobileMode == 0){          
+              iphoneControl(iphoneData,index);
+               memset(iphoneData,255,10);
+            }
+            //set default          
+            index = 0;    
+        }else{
+            iphoneData[index++] = incomingByte;
+        }
+        
     }
+}
+
+void iphoneControl(unsigned char data[],int index){
+  
+    for(int i=0;i<index;i++){
+        Serial.write(data[i]);
+         delay(100);
+       }
 }
 
 

@@ -73,11 +73,27 @@
     
 }
 - (IBAction)userOpen:(UIButton *)sender {
-    
-    unsigned char action = 1;
+    //送出iphone識別
+    unsigned char action = 99;
+    [self sendToArduino:action];
+    //送出功能識別
+    action = 0x02;
+    [self sendToArduino:action];
+    //送出功能值
+    action = 0x01;
+    [self sendToArduino:action];
+    //送出結束值
+    action = 100;
+    [self sendToArduino:action];
+
+}
+
+
+-(void)sendToArduino:(unsigned char)action{
     NSData *actionData = [NSData dataWithBytes:&action length:sizeof(action)];
     [self.blunoManager writeDataToDevice:actionData Device:self.blunoDev];
 }
+
 - (IBAction)userClose:(UIButton *)sender {
     unsigned char action = 0;
     NSData *actionData = [NSData dataWithBytes:&action length:sizeof(action)];
@@ -136,8 +152,9 @@
 
 
 -(void)didReceiveData:(NSData*)data Device:(DFBlunoDevice*)dev{
-    unsigned char *action = (unsigned char *)[data bytes];
+    char *action = (char *)[data bytes];
     NSLog(@"%i",*action);
+    /*
     if(*action == 1){
         self.openRedBtn.enabled = NO;
         self.closeRedBtn.enabled = YES;
@@ -147,6 +164,7 @@
         self.closeRedBtn.enabled = NO;
         [self.redStateSwitch setOn:NO];
     }
+     */
 }
 
 
