@@ -10,67 +10,77 @@
     android:focusable="true"
     android:focusableInTouchMode="true">
 
-    <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/scrollView"
-        android:layout_below="@+id/editText2"
-        android:layout_alignStart="@+id/editText2"
-        android:layout_alignParentBottom="true"
-        android:layout_alignEnd="@+id/serialSendText">
-
-        <TextView
-            android:id="@+id/serialReveicedText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:textSize="10sp"
-            android:layout_below="@+id/editText2"
-            android:layout_alignStart="@+id/editText2"
-            android:layout_alignEnd="@+id/serialSendText"
-            android:layout_alignParentBottom="true" />
-    </ScrollView>
-
     <Button
-        android:id="@+id/buttonSerialSend"
+        android:id="@+id/buttonScan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/serialSendText"
-        android:layout_alignRight="@+id/serialSendText"
-        android:text="Send Data" />
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="30dp"
+        android:layout_alignParentTop="true"
+        android:text="Scan" />
+
+
 
     <TextView
         android:id="@+id/editText2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/serialSendText"
-        android:layout_below="@+id/serialSendText"
+        android:layout_alignLeft="@id/buttonScan"
+        android:layout_below="@id/buttonScan"
         android:layout_marginTop="20dp"
         android:ems="10"
-        android:text="Received Data:"
+        android:text="Feature"
         android:textSize="25sp" />
 
-    <EditText
-        android:id="@+id/serialSendText"
-        android:layout_width="310dp"
-        android:layout_height="40dp"
-        android:layout_below="@+id/buttonScan"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="22dp"
-        android:background="#555555"
-        android:bufferType="editable"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Data sending Area"
-        android:textColor="#999999"
-        android:textSize="20dip" />
+    <Button
+    android:id="@+id/buttonOpen"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignLeft="@+id/buttonScan"
+    android:layout_below="@+id/editText2"
+    android:layout_marginTop="10dp"
+    android:text="Open" />
 
     <Button
-        android:id="@+id/buttonScan"
+        android:id="@+id/buttonClose"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/serialSendText"
-        android:layout_alignParentTop="true"
-        android:text="Scan" />
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/editText2"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="30dp"
+        android:text="close" />
+
+    <RadioGroup
+        android:id = "@+id/lightState"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        >
+        <RadioButton
+            android:id = "@+id/lightOpen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:textSize="20sp"
+            android:layout_weight="1"
+            android:text = "開"/>
+
+        <RadioButton
+            android:id = "@+id/lightClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:textSize="20sp"
+            android:text = "關"/>
+    </RadioGroup>
+
+
+
+
+
 
 </RelativeLayout>

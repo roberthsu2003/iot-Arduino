@@ -7,14 +7,17 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ScrollView;
-import android.widget.TextView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+
 
 public class MainActivity  extends BlunoLibrary {
 	private Button buttonScan;
-	private Button buttonSerialSend;
-	private EditText serialSendText;
-	private TextView serialReceivedText;
+	private Button buttonOpen;
+	private Button buttonClose;
+	private RadioGroup lightState;
+	private RadioButton radioOpen;
+	private RadioButton radioClose;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,31 +28,67 @@ public class MainActivity  extends BlunoLibrary {
 
         serialBegin(115200);													//set the Uart Baudrate on BLE chip to 115200
 
-        serialReceivedText=(TextView) findViewById(R.id.serialReveicedText);	//initial the EditText of the received data
-        serialSendText=(EditText) findViewById(R.id.serialSendText);			//initial the EditText of the sending data
+        		//initial the button for sending the data
 
-        buttonSerialSend = (Button) findViewById(R.id.buttonSerialSend);		//initial the button for sending the data
-        buttonSerialSend.setOnClickListener(new OnClickListener() {
+		buttonOpen = (Button)findViewById(R.id.buttonOpen);
+		buttonClose = (Button)findViewById(R.id.buttonClose);
+		lightState = (RadioGroup)findViewById(R.id.lightState);
+        buttonScan = (Button) findViewById(R.id.buttonScan);
+		radioOpen = (RadioButton) findViewById(R.id.lightOpen);
+		radioClose = (RadioButton) findViewById(R.id.lightClose);
 
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-
-				//serialSend(serialSendText.getText().toString());				//send the data to the BLUNO
-
-				char action = 1;
-				serialSend(Character.toString(action));
-			}
-		});
-
-        buttonScan = (Button) findViewById(R.id.buttonScan);					//initial the button for scanning the BLE device
-        buttonScan.setOnClickListener(new OnClickListener() {
+		for(int i=0;i<lightState.getChildCount();i++){
+			lightState.getChildAt(i).setEnabled(false);
+		}
+        buttonScan.setOnClickListener(new OnClickListener() {               //initial the button for scanning the BLE device
 
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 
 				buttonScanOnClickProcess();										//Alert Dialog for selecting the BLE device
+			}
+		});
+
+		buttonOpen.setOnClickListener(new View.OnClickListener(){
+
+			@Override
+			public void onClick(View view) {
+				//android代碼98
+				char action = 98;
+				serialSend(Character.toString(action));
+
+				//功能識別
+				action = 2;
+				serialSend(Character.toString(action));
+
+				//送出功能值
+				action = 1;
+				serialSend(Character.toString(action));
+
+				//送出結束值
+				action = 100;
+				serialSend(Character.toString(action));
+			}
+		});
+
+		buttonClose.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				char action = 98;
+				serialSend(Character.toString(action));
+
+				//功能識別
+				action = 2;
+				serialSend(Character.toString(action));
+
+				//送出功能值
+				action = 0;
+				serialSend(Character.toString(action));
+
+				//送出結束值
+				action = 100;
+				serialSend(Character.toString(action));
 			}
 		});
 	}
@@ -114,8 +153,20 @@ public class MainActivity  extends BlunoLibrary {
 		//serialReceivedText.append(theString);							//append the text into the EditText
 		//The Serial data from the BLUNO may be sub-packaged, so using a buffer to hold the String is a good choice.
 		//((ScrollView)serialReceivedText.getParent()).fullScroll(View.FOCUS_DOWN);
+		char action = theString.charAt(0);
+		if(action == 1){
+			radioOpen.setChecked(true);
+		}else if(action == 0){
+			radioClose.setChecked(true);
+		}
 
-		System.out.println(theString);
 	}
+
+
+
+
+
+
+
 
 }
