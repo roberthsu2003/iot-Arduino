@@ -1,0 +1,357 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A45E4CD31D02BAA3000D3B25 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A45E4CD21D02BAA3000D3B25 /* main.m */; };
+		A45E4CD61D02BAA3000D3B25 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A45E4CD51D02BAA3000D3B25 /* AppDelegate.m */; };
+		A45E4CDC1D02BAA3000D3B25 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A45E4CDA1D02BAA3000D3B25 /* Main.storyboard */; };
+		A45E4CDE1D02BAA3000D3B25 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A45E4CDD1D02BAA3000D3B25 /* Assets.xcassets */; };
+		A45E4CE11D02BAA3000D3B25 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A45E4CDF1D02BAA3000D3B25 /* LaunchScreen.storyboard */; };
+		A45E4CEA1D02BC2C000D3B25 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A45E4CE91D02BC2C000D3B25 /* MainViewController.m */; };
+		A45E4CF71D02C15C000D3B25 /* BLEDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = A45E4CF01D02C15C000D3B25 /* BLEDevice.m */; };
+		A45E4CF81D02C15C000D3B25 /* BLEUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = A45E4CF21D02C15C000D3B25 /* BLEUtility.m */; };
+		A45E4CF91D02C15C000D3B25 /* DFBlunoDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = A45E4CF41D02C15C000D3B25 /* DFBlunoDevice.m */; };
+		A45E4CFA1D02C15C000D3B25 /* DFBlunoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A45E4CF61D02C15C000D3B25 /* DFBlunoManager.m */; };
+		A47269E21D0D2363006765F6 /* DiscoverBluno.m in Sources */ = {isa = PBXBuildFile; fileRef = A47269E11D0D2363006765F6 /* DiscoverBluno.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A45E4CCE1D02BAA3000D3B25 /* Bluno_fading.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bluno_fading.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A45E4CD21D02BAA3000D3B25 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A45E4CD41D02BAA3000D3B25 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		A45E4CD51D02BAA3000D3B25 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		A45E4CDB1D02BAA3000D3B25 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A45E4CDD1D02BAA3000D3B25 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A45E4CE01D02BAA3000D3B25 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A45E4CE21D02BAA3000D3B25 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A45E4CE81D02BC2C000D3B25 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainViewController.h; path = ../MainViewController.h; sourceTree = "<group>"; };
+		A45E4CE91D02BC2C000D3B25 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainViewController.m; path = ../MainViewController.m; sourceTree = "<group>"; };
+		A45E4CEF1D02C15C000D3B25 /* BLEDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLEDevice.h; sourceTree = "<group>"; };
+		A45E4CF01D02C15C000D3B25 /* BLEDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLEDevice.m; sourceTree = "<group>"; };
+		A45E4CF11D02C15C000D3B25 /* BLEUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLEUtility.h; sourceTree = "<group>"; };
+		A45E4CF21D02C15C000D3B25 /* BLEUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLEUtility.m; sourceTree = "<group>"; };
+		A45E4CF31D02C15C000D3B25 /* DFBlunoDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFBlunoDevice.h; sourceTree = "<group>"; };
+		A45E4CF41D02C15C000D3B25 /* DFBlunoDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFBlunoDevice.m; sourceTree = "<group>"; };
+		A45E4CF51D02C15C000D3B25 /* DFBlunoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFBlunoManager.h; sourceTree = "<group>"; };
+		A45E4CF61D02C15C000D3B25 /* DFBlunoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFBlunoManager.m; sourceTree = "<group>"; };
+		A47269E01D0D2363006765F6 /* DiscoverBluno.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DiscoverBluno.h; path = ../DiscoverBluno.h; sourceTree = "<group>"; };
+		A47269E11D0D2363006765F6 /* DiscoverBluno.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DiscoverBluno.m; path = ../DiscoverBluno.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A45E4CCB1D02BAA3000D3B25 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A45E4CC51D02BAA3000D3B25 = {
+			isa = PBXGroup;
+			children = (
+				A45E4CED1D02C15C000D3B25 /* Bluno */,
+				A45E4CD01D02BAA3000D3B25 /* Bluno_test */,
+				A45E4CCF1D02BAA3000D3B25 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A45E4CCF1D02BAA3000D3B25 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A45E4CCE1D02BAA3000D3B25 /* Bluno_fading.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A45E4CD01D02BAA3000D3B25 /* Bluno_test */ = {
+			isa = PBXGroup;
+			children = (
+				A47269E01D0D2363006765F6 /* DiscoverBluno.h */,
+				A47269E11D0D2363006765F6 /* DiscoverBluno.m */,
+				A45E4CE81D02BC2C000D3B25 /* MainViewController.h */,
+				A45E4CE91D02BC2C000D3B25 /* MainViewController.m */,
+				A45E4CD41D02BAA3000D3B25 /* AppDelegate.h */,
+				A45E4CD51D02BAA3000D3B25 /* AppDelegate.m */,
+				A45E4CDA1D02BAA3000D3B25 /* Main.storyboard */,
+				A45E4CDD1D02BAA3000D3B25 /* Assets.xcassets */,
+				A45E4CDF1D02BAA3000D3B25 /* LaunchScreen.storyboard */,
+				A45E4CE21D02BAA3000D3B25 /* Info.plist */,
+				A45E4CD11D02BAA3000D3B25 /* Supporting Files */,
+			);
+			path = Bluno_test;
+			sourceTree = "<group>";
+		};
+		A45E4CD11D02BAA3000D3B25 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A45E4CD21D02BAA3000D3B25 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A45E4CED1D02C15C000D3B25 /* Bluno */ = {
+			isa = PBXGroup;
+			children = (
+				A45E4CEE1D02C15C000D3B25 /* Core */,
+				A45E4CF31D02C15C000D3B25 /* DFBlunoDevice.h */,
+				A45E4CF41D02C15C000D3B25 /* DFBlunoDevice.m */,
+				A45E4CF51D02C15C000D3B25 /* DFBlunoManager.h */,
+				A45E4CF61D02C15C000D3B25 /* DFBlunoManager.m */,
+			);
+			name = Bluno;
+			path = Bluno_test/Bluno;
+			sourceTree = "<group>";
+		};
+		A45E4CEE1D02C15C000D3B25 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				A45E4CEF1D02C15C000D3B25 /* BLEDevice.h */,
+				A45E4CF01D02C15C000D3B25 /* BLEDevice.m */,
+				A45E4CF11D02C15C000D3B25 /* BLEUtility.h */,
+				A45E4CF21D02C15C000D3B25 /* BLEUtility.m */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A45E4CCD1D02BAA3000D3B25 /* Bluno_fading */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A45E4CE51D02BAA3000D3B25 /* Build configuration list for PBXNativeTarget "Bluno_fading" */;
+			buildPhases = (
+				A45E4CCA1D02BAA3000D3B25 /* Sources */,
+				A45E4CCB1D02BAA3000D3B25 /* Frameworks */,
+				A45E4CCC1D02BAA3000D3B25 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Bluno_fading;
+			productName = Bluno_test;
+			productReference = A45E4CCE1D02BAA3000D3B25 /* Bluno_fading.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A45E4CC61D02BAA3000D3B25 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = roberthsu;
+				TargetAttributes = {
+					A45E4CCD1D02BAA3000D3B25 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+				};
+			};
+			buildConfigurationList = A45E4CC91D02BAA3000D3B25 /* Build configuration list for PBXProject "Bluno_fading" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A45E4CC51D02BAA3000D3B25;
+			productRefGroup = A45E4CCF1D02BAA3000D3B25 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A45E4CCD1D02BAA3000D3B25 /* Bluno_fading */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A45E4CCC1D02BAA3000D3B25 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A45E4CE11D02BAA3000D3B25 /* LaunchScreen.storyboard in Resources */,
+				A45E4CDE1D02BAA3000D3B25 /* Assets.xcassets in Resources */,
+				A45E4CDC1D02BAA3000D3B25 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A45E4CCA1D02BAA3000D3B25 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A45E4CF81D02C15C000D3B25 /* BLEUtility.m in Sources */,
+				A47269E21D0D2363006765F6 /* DiscoverBluno.m in Sources */,
+				A45E4CD61D02BAA3000D3B25 /* AppDelegate.m in Sources */,
+				A45E4CF91D02C15C000D3B25 /* DFBlunoDevice.m in Sources */,
+				A45E4CF71D02C15C000D3B25 /* BLEDevice.m in Sources */,
+				A45E4CFA1D02C15C000D3B25 /* DFBlunoManager.m in Sources */,
+				A45E4CEA1D02BC2C000D3B25 /* MainViewController.m in Sources */,
+				A45E4CD31D02BAA3000D3B25 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		A45E4CDA1D02BAA3000D3B25 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A45E4CDB1D02BAA3000D3B25 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		A45E4CDF1D02BAA3000D3B25 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A45E4CE01D02BAA3000D3B25 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A45E4CE31D02BAA3000D3B25 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A45E4CE41D02BAA3000D3B25 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A45E4CE61D02BAA3000D3B25 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Bluno_test/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.gjun.www.Bluno-fading";
+				PRODUCT_NAME = Bluno_fading;
+			};
+			name = Debug;
+		};
+		A45E4CE71D02BAA3000D3B25 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Bluno_test/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.gjun.www.Bluno-fading";
+				PRODUCT_NAME = Bluno_fading;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A45E4CC91D02BAA3000D3B25 /* Build configuration list for PBXProject "Bluno_fading" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A45E4CE31D02BAA3000D3B25 /* Debug */,
+				A45E4CE41D02BAA3000D3B25 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A45E4CE51D02BAA3000D3B25 /* Build configuration list for PBXNativeTarget "Bluno_fading" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A45E4CE61D02BAA3000D3B25 /* Debug */,
+				A45E4CE71D02BAA3000D3B25 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A45E4CC61D02BAA3000D3B25 /* Project object */;
+}
