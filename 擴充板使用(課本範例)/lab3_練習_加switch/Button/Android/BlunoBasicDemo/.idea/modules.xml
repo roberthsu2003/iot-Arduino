@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/BlunoBasicDemo.iml" filepath="$PROJECT_DIR$/BlunoBasicDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/blunoButton/app.iml" filepath="$PROJECT_DIR$/blunoButton/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/blunoButton/blunoButton.iml" filepath="$PROJECT_DIR$/blunoButton/blunoButton.iml" />
     </modules>
   </component>
 </project>

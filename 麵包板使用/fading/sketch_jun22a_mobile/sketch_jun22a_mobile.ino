@@ -16,8 +16,8 @@ void setup() {
 
 void loop() {
   mobileControl(); 
-  
   breadbordAction();
+  
 }
 
 void mobileControl(){
@@ -78,14 +78,24 @@ void mobileAction(unsigned char data[],int index){
 
 
 void breadbordAction(){
+  
   int inputValue = analogRead(potentiometer);
-  unsigned char outputValue = (float)inputValue / 1023 * 255;  
+  //unsigned char outputValue = (float)inputValue / 1023 * 255;
+  int outputValue = (float)inputValue / 1023 * 255;  
   analogWrite(led,outputValue);
   delay(100);
-  //Serial.println(outputValue);
   
-  if (mobileState) {
-    Serial.write(outputValue);
+  if (mobileMode == 0){
+    if (mobileState) {
+        Serial.write(outputValue);
+    }
+  }else if(mobileMode == 1){
+    if (mobileState) {
+        char s[64];
+        sprintf(s,"%d",outputValue);
+        Serial.write(s);
+        
+    }
   }
 }
 
