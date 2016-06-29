@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Bluno_temperature.iml" filepath="$PROJECT_DIR$/Bluno_temperature.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bluno_temperature/bluno_temperature.iml" filepath="$PROJECT_DIR$/bluno_temperature/bluno_temperature.iml" />
+    </modules>
+  </component>
+</project>
