@@ -57,7 +57,7 @@
     cell.textLabel.text = @"其它人的Bluno";
     
     cell.detailTextLabel.text = blunoDevice.identifier;
-    
+    cell.userInteractionEnabled = true;
     return cell;
 }
 

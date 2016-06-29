@@ -1,6 +1,7 @@
+
 void setup() {
   // put your setup code here, to run once:
-  pinMode(A4,INPUT);
+  pinMode(A4,INPUT_PULLUP);
   Serial.begin(115200);
 }
 
