@@ -14,7 +14,7 @@ void setup()
    digitalWrite(LedGreen,LOW) ; // turn off LED
    Serial.begin(57600);         // Baud rate of HC-0x bluetooth module(設定已知之速率)
    delay(1000);
-   Serial.println("AT+NAME=Robert"); // Change the "Appsduino" name to your ID name,改成你欲設定之名稱
+   Serial.println("AT+NAME=RobertDino"); // Change the "Appsduino" name to your ID name,改成你欲設定之名稱
    while(!Serial.available()) ; // waiting for 'ok' message
    Serial.read(); // flush feedback message
    digitalWrite(LedGreen,HIGH) ; // turn on LED    

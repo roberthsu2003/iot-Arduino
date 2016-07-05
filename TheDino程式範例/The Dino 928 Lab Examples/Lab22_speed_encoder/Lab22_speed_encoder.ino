@@ -11,17 +11,17 @@ void setup() {
 
 void loop() {
   //暫時停止中斷
-  uint8_t oldSREG = SREG;
-  cli();
+  //uint8_t oldSREG = SREG;
+  //cli();
   pos = M1_pos;  //　取得位置計數值
-  SREG = oldSREG;
+  //SREG = oldSREG;
 
   //　若位置有變化，則顯示
-  if (pos != oldpos)
-  {
+  //if (pos != oldpos)
+  //{
     Serial.println(pos);  //顯示目前旋轉格數
-    oldpos = pos;
-  }
+    //oldpos = pos;
+  //}
   delay(1000);
 }
 
