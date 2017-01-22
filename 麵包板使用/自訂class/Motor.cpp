@@ -1,4 +1,7 @@
 #include "Motor.h"
+String Motor::STOP = "stop";
+String Motor::FOREWARD = "foreward";
+String Motor::BACKWARD = "backward";
  Motor::Motor(int pin1,int pin2,int speedPin){
       _modePin1 = pin1;
       _modePin2 = pin2;
@@ -34,4 +37,3 @@
        digitalWrite(_modePin2,HIGH);
     }
  }
-
