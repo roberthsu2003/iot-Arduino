@@ -1,0 +1,12 @@
+BM019 to WEMOS
+1 DOUT - no used
+2 DIN - D1 (IO)
+3 SS - D7
+4 MISO - D6 (MISO)
+5 MOSI - D7 (MOSI)
+6 SCK - D5 (SCK)
+7 SS_0 - tied to 3.3v so BM019 uses SPI
+8 VDD
+9 VIN - 5v
+10 GND - Gnd
+- See more at: http://www.esp8266.com/viewtopic.php?f=13&t=8657#sthash.4YDizFQ5.dpuf
