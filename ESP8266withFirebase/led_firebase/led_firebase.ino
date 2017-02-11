@@ -18,7 +18,7 @@
 #define D4 4
 const char* ssid = "robert_hsu_home";
 const char* password = "0926656000";
-
+String section;
 
 
 
@@ -84,13 +84,17 @@ void loop() {
   }
   
   // Read all the lines of the reply from server and print them to Serial
+  Serial.println("--------------data--------------------");
+  section="header";
   while(client.available()){
     String line = client.readStringUntil('\r');
     parseJSON(line);
-    Serial.print(line);
+    //Serial.print(line);
   }
   
+  
   Serial.println();
+  Serial.println("----------------------------------------");
   Serial.println("closing connection");;
   }
   delay(3000);
@@ -99,15 +103,25 @@ void loop() {
 
 void parseJSON(String line){
   
- 
-      String result = line.substring(1);      // Parse JSON
+      if(section=="header"){
+        Serial.println(".");
+        if (line=="\n"){
+          section = "json";
+        }
+        return;
+      }
+      
+      String result = line.substring(1);      // Parse JSON  
+      Serial.println(result);    
       int size = result.length() + 1;
+      Serial.println(size);
       char json[size];
       result.toCharArray(json, size);
       StaticJsonBuffer<200> jsonBuffer;
       JsonObject& json_parsed = jsonBuffer.parseObject(json);
       if (!json_parsed.success())
       {
+        Serial.println();
         Serial.println("parseObject() failed");
         return;
       }
