@@ -15,12 +15,16 @@
 #include <WiFiClientSecure.h>
 #include "Timer.h"
 #include <HTU21D.h>
-#define D3 0
+#define D8 0
+#define SoundSensor A0
+
 boolean windowValue = false;
 float humidityValue = 0.0;
 float temperatureValue = 0.0;
+float soundValue = 0.0;
 
-const char* ssid = "Robert iphone";
+
+const char* ssid = "robert_hsu_home";
 const char* password = "0926656000";
 
 
@@ -40,7 +44,7 @@ void setup() {
   wifiConnection();
 
   //window
-  pinMode(D3,INPUT_PULLUP);
+  pinMode(D8,INPUT_PULLUP);
   if (WiFi.status() == WL_CONNECTED){
     timer.every(2000,connectionFirebase);
     }else{
@@ -54,12 +58,14 @@ void setup() {
 }
 
 void loop() {
-  timer.update();
-    windowValue = configureWindow(D3);
+    timer.update();
+    windowValue = configureWindow(D8);
     humidityValue = getHumidity();
     temperatureValue = getTemperatureValue();
-    Serial.print("windowValue:");
-    Serial.println(windowValue);
+    soundValue = analogRead(SoundSensor);
+    delay(100);
+    Serial.print("soundValue:");
+    Serial.println(soundValue);
    
 }
 
@@ -89,7 +95,7 @@ void connectionFirebase(){
 
 
   String url = "/home.json";
-  String jsonString = "{\"window\":" + String(windowValue?"true":"false") + ",\"sound\":34.12,\"temp\":" + temperatureValue + ",\"humidity\":" + humidityValue + ",\"relay\":{\"n1\":true,\"n2\":false}}";
+  String jsonString = "{\"window\":" + String(windowValue?"true":"false") + ",\"sound\":" + soundValue + ",\"temp\":" + temperatureValue + ",\"humidity\":" + humidityValue + "}";
 
   Serial.print("requesting URL: ");
   Serial.println(url);
