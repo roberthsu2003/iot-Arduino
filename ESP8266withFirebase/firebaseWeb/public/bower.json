@@ -1,0 +1,17 @@
+{
+  "name": "public",
+  "homepage": "https://github.com/roberthsu2003/iot-course",
+  "authors": [
+    "robert <roberthsu2003@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
