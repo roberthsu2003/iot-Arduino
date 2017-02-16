@@ -37,10 +37,7 @@ const char* fingerprint = "CF 05 98 89 CA FF 8E D8 5E 5C E0 C2 E4 F7 E6 C3 C7 50
 Timer timer;
 HTU21D myHumidity;
 void setup() {
-  Serial.begin(115200);
-  Serial.println();
-  Serial.print("connecting to ");
-  Serial.println(ssid);
+  
   wifiConnection();
 
   //window
@@ -70,6 +67,10 @@ void loop() {
 }
 
 void wifiConnection(){
+  Serial.begin(115200);
+  Serial.println();
+  Serial.print("connecting to ");
+  Serial.println(ssid);
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) {
     Serial.print(".");

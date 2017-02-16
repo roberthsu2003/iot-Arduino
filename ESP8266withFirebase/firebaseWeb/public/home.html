@@ -19,12 +19,17 @@
 
     <!-- Custom styles for this template -->
     <link href="jumbotron-narrow.css" rel="stylesheet">
-    <style type="text/css">
-        @media screen and (min-width: 768px){
-            .jumbotron h1,
-            .jumbotron .h1 {
-                            font-size: 57px;
-                           }
+    <style type="text/css">     
+        .panel-title {
+        margin-top: 0;
+        margin-bottom: 0;
+        font-size: 30px;
+        color: inherit;
+        }
+        
+        .panel-body{
+            font-size:30px;
+            color:red;
         }
 
     
@@ -57,12 +62,45 @@
         <h3 class="text-muted">Arduino</h3>
       </div>
 
-      <div class="jumbotron">
-        <h1>Arduino 智慧家庭展示</h1>
-        <p class="lead">同學們可以透過現在的網頁來顯示目前所有在不同環境的Arduion sensor的狀態和數據</p>
+      <div class="jumbotron container">
+        <h2>溫度,濕度,聲音,窗戶狀態</h2>
+          
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">溫度</h3>
+            </div>
+            <div class="panel-body" id="temperature">
+                目前溫度:
+            </div>
+        </div>
+          
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">濕度</h3>
+            </div>
+            <div class="panel-body" id="humidity">
+                目前濕度:
+            </div>
+        </div>
+          
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">聲音</h3>
+            </div>
+            <div class="panel-body" id="sound">
+                目前聲音:
+            </div>
+        </div>
         
-      </div>
-
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">窗戶狀態</h3>
+            </div>
+            <div class="panel-body" id="windowSate">
+                目前窗戶狀態:
+            </div>
+        </div>
+    
     
 
       <footer class="footer">
@@ -87,10 +125,20 @@
        
         firebase.initializeApp(config);
         var database = firebase.database();
-       
+        
         
         $(document).ready(function(){
-            console.log(config);
+            var homeNode = database.ref("/home");
+            console.log(homeNode);
+            homeNode.on('value',function(snapshot){
+                 console.log(snapshot.val());
+                var snapshotValue = snapshot.val();
+                $("#temperature").html(snapshotValue["temp"]);
+                $("#humidity").html(snapshotValue["humidity"]);
+                $("#sound").html(snapshotValue["sound"]);
+                $("#windowSate").html(snapshotValue["window"]?"開啟":"關閉");
+                
+            })
         });
         
     </script>
