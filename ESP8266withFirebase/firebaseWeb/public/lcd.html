@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title>Arduino ESP8266 Home展示</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="jumbotron-narrow.css" rel="stylesheet">
+    <style type="text/css">
+        .panel-title{
+            font-size:30px;
+        }
+        
+        .input-group-addon{
+            font-size:20px;
+        }
+        
+        .form-control{
+            font-size:20px;
+        }
+        
+        .input-group{
+            margin-top:30px;
+            margin-bottom:30px;
+        }
+        
+        .label{
+            font-size:150% ;
+        }
+
+    
+
+    </style>
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="container">
+      <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation"><a href="#">Home</a></li>
+            <li role="presentation"><a href="home.html">智慧家庭</a></li>
+            <li role="presentation"  class="active"><a href="lcd.html">LCD Relay</a></li>
+            <li role="presentation"><a href="#">RC522-RFID</a></li>
+          </ul>
+        </nav>
+        <h3 class="text-muted">Arduino</h3>
+      </div>
+
+      <div class="jumbotron">
+        <h3>控制LCD和Relay</h3>
+          <div class="panel panel-primary">
+          <div class="panel-heading">
+          <h3 class="panel-title">LCD內容控制</h3>
+          </div>
+          <div class="panel-body">
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">LCD_LINE1</span>
+                    <input type="text" class="form-control" id="line1Field" placeholder="LINE1" aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">LCD_LINE2</span>
+                    <input type="text" class="form-control" id="line2Field" placeholder="LINE2" aria-describedby="basic-addon1">
+                 </div>
+                <button class="btn btn-default" type="button">確定</button>
+          </div>
+          </div>
+          
+          <div class="panel panel-primary">
+          <div class="panel-heading">
+          <h3 class="panel-title">Relay控制</h3>
+          </div>
+          <div class="panel-body">
+                <span class="label label-default">Relay(IN1)</span>
+                <div class="btn-group" role="group" aria-label="...">
+                    <button type="button" class="btn btn-default" id="relay1Open">OPEN</button>
+                    <button type="button" class="btn btn-danger" id="relay1Close">CLOSE</button>
+                    
+                </div>
+                <br/>
+                <br/>
+                <br/>
+              <span class="label label-default">Relay(IN2)</span>
+                <div class="btn-group" role="group" aria-label="...">
+                    <button type="button" class="btn btn-default" id="relay2Open">OPEN</button>
+                    <button type="button" class="btn btn-danger" id="relay2Close">CLOSE</button>
+                    
+                </div>
+
+          </div>
+          </div>
+        
+        
+      </div>
+
+    
+
+      <footer class="footer">
+        <p>&copy; 2016 Robert HSU, Inc.</p>
+      </footer>
+
+    </div> <!-- /container -->
+
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script>
+         var config = {
+            apiKey: "AIzaSyCBa3cc1A9mlWzDnG_0e9ltIcZhOWiA-tk",
+            authDomain: "arduinofirebase-6d104.firebaseapp.com",
+            databaseURL: "https://arduinofirebase-6d104.firebaseio.com",
+            storageBucket: "arduinofirebase-6d104.appspot.com",
+            messagingSenderId: "775007261514"
+         };
+       
+        firebase.initializeApp(config);
+        var database = firebase.database();
+       
+        
+        
+        
+    $(document).ready(function(){
+        database.ref("/lcd").on('value',function(snapshot){
+            var contents = snapshot.val()
+            var line1Content = contents["line1"];
+            var line2Content = contents["line2"];
+            var relay1State = contents["relay1"];
+            var relay2State = contents["relay2"];
+            
+            console.log(line1Content);
+            console.log(line2Content);
+            console.log(relay1State);
+            console.log(relay2State);
+            $("#line1Field").val(line1Content);
+            $("#line2Field").val(line2Content);
+            
+            if(relay1State){
+                $("#relay1Open").removeClass(function(){
+                    return $(this).attr("class");
+                }).addClass("btn btn-danger");
+                $("#relay1Close").removeClass(function(){
+                    return $(this).attr("class");
+                }).addClass("btn btn-default");
+                
+            }else{
+                $("#relay1Open").removeClass(function(){
+                    return $(this).attr("class");
+                }).addClass("btn btn-default");
+                $("#relay1Close").removeClass(function(){
+                    return $(this).attr("class");
+                }).addClass("btn btn-danger");
+            }
+            
+            if(relay2State){
+                $("#relay2Open").removeClass(function(){
+                    return $(this).attr("class");
+                }).addClass("btn btn-danger");
+                $("#relay2Close").removeClass(function(){
+                    return $(this).attr("class");
+                }).addClass("btn btn-default");
+                
+            }else{
+                $("#relay2Open").removeClass(function(){
+                    return $(this).attr("class");
+                }).addClass("btn btn-default");
+                $("#relay2Close").removeClass(function(){
+                    return $(this).attr("class");
+                }).addClass("btn btn-danger");
+            }
+
+        });
+    });
+        
+    </script>
+    
+      
+  </body>
+</html>
