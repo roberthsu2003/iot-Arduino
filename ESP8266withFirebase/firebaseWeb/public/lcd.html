@@ -85,7 +85,7 @@
                     <span class="input-group-addon" id="basic-addon1">LCD_LINE2</span>
                     <input type="text" class="form-control" id="line2Field" placeholder="LINE2" aria-describedby="basic-addon1">
                  </div>
-                <button class="btn btn-default" type="button">確定</button>
+                <button class="btn btn-default" type="button" id="lcdOk">確定</button>
           </div>
           </div>
           
@@ -152,10 +152,7 @@
             var relay1State = contents["relay1"];
             var relay2State = contents["relay2"];
             
-            console.log(line1Content);
-            console.log(line2Content);
-            console.log(relay1State);
-            console.log(relay2State);
+            
             $("#line1Field").val(line1Content);
             $("#line2Field").val(line2Content);
             
@@ -194,6 +191,58 @@
             }
 
         });
+        
+        $("#lcdOk").bind("click",function(){
+            var line1Content = $("#line1Field").val();
+            var line2Content = $("#line2Field").val();
+            console.log(line1Content);
+            console.log(line2Content);
+            var dataRef = database.ref("/lcd");
+            var updates = {};
+            updates["/line1"] = line1Content;
+            updates["/line2"] = line2Content;
+            dataRef.update(updates);            
+        });
+        
+        $("#relay1Open").bind("click",function(){
+            var dataRef = database.ref("/lcd");
+            var updates = {};
+            updates["/relay1"] = true;
+            updateRelayState("relay1",dataRef,updates);
+        });
+        
+        $("#relay1Close").bind("click",function(){
+            var dataRef = database.ref("/lcd");
+            var updates = {};
+            updates["/relay1"] = false;
+            updateRelayState("relay1",dataRef,updates);
+        });
+        
+         $("#relay2Open").bind("click",function(){
+            var dataRef = database.ref("/lcd");
+            var updates = {};
+            updates["/relay2"] = true;
+            updateRelayState("relay2",dataRef,updates);
+        });
+        
+        $("#relay2Close").bind("click",function(){
+            var dataRef = database.ref("/lcd");
+            var updates = {};
+            updates["/relay2"] = false;
+            updateRelayState("relay2",dataRef,updates);
+        });
+        
+        function updateRelayState(witchRelay,dataRef,updates){
+            if (witchRelay == "relay1"){
+                dataRef.update(updates);
+                console.log("upadte relay1");
+            }
+            
+            if (witchRelay == "relay2"){
+                dataRef.update(updates);
+                console.log("upadte relay2");
+            }
+        }
     });
         
     </script>
