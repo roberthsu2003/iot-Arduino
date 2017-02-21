@@ -104,8 +104,9 @@ void connectionFirebase(){
   section="header";
   while(client.available()){
     String line = client.readStringUntil('\r');
+    Serial.print(line);
     parseJSON(line);
-    //Serial.print(line);
+    
   }
   
   
@@ -128,12 +129,12 @@ void parseJSON(String line){
         return;
       }
       
-      String result = line.substring(1);      // Parse JSON  
-      Serial.println(result);    
-      int size = result.length() + 1;
-      Serial.println(size);
+      //String result = line.substring(1);      // Parse JSON  
+      //Serial.println(result);    
+      int size = line.length() + 1;
+      //Serial.println(size);
       char json[size];
-      result.toCharArray(json, size);
+      line.toCharArray(json, size);
       StaticJsonBuffer<200> jsonBuffer;
       JsonObject& json_parsed = jsonBuffer.parseObject(json);
       if (!json_parsed.success())
