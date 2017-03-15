@@ -14,7 +14,7 @@
 #include <ESP8266WiFi.h>
 #include <WiFiClientSecure.h>
 #include <ArduinoJson.h>
-#include <Timer.h>
+
 #define D4 4
 const char* ssid = "robert_hsu_home";
 const char* password = "0926656000";
@@ -44,10 +44,7 @@ void setup() {
   Serial.println("");
   Serial.println("WiFi connected");
   Serial.println("IP address: ");
-  Serial.println(WiFi.localIP());
-  
-  
- 
+  Serial.println(WiFi.localIP()); 
 }
 
 void loop() {
@@ -95,7 +92,7 @@ void loop() {
   
   Serial.println();
   Serial.println("----------------------------------------");
-  Serial.println("closing connection");;
+  Serial.println("closing connection");
   }
   delay(3000);
   
