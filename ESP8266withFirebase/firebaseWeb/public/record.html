@@ -69,8 +69,8 @@
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
-    
     <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
+    
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src = "dist/js/menu.js"></script>
     <script>
@@ -84,10 +84,15 @@
        
         firebase.initializeApp(config);
         var database = firebase.database();
-       
+        var rfid1Ref = database.ref("rfid1");
         
-        $(document).ready(function(){
-            console.log(config);
+        $(document).ready(function(){3
+              rfid1Ref.on('value',function(snapshot){
+                  var json = snapshot.val();
+                  for (var key in json){
+                    console.log(json[key]["id"]);
+                  }
+              });
         });
         
     </script>
