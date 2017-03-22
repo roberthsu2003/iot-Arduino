@@ -1,102 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="favicon.ico">
 
-    <title>RFID-出入記錄</title>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="favicon.ico">
 
-    <!-- Bootstrap core CSS -->
-    <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+  <title>RFID-出入記錄</title>
 
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <link href="assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+  <!-- Bootstrap core CSS -->
+  <link href="dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="jumbotron-narrow.css" rel="stylesheet">
-    <style type="text/css">
-        @media screen and (min-width: 768px){
-            .jumbotron h1,
-            .jumbotron .h1 {
-                            font-size: 57px;
-                           }
-        }
+  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  <link href="assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
-    
+  <!-- Custom styles for this template -->
+  <link href="jumbotron-narrow.css" rel="stylesheet">
+  <style type="text/css">
+    @media screen and (min-width: 768px) {
+      .jumbotron h1,
+      .jumbotron .h1 {
+        font-size: 57px;
+      }
+    }
+  </style>
 
-    </style>
+  <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+  <!--[if lt IE 9]><script srYr consectetur meditation, lyft flexitarian excepteur  next level pop-up poutine.  Plaid laborum irure  enim.  Voluptate  non  nisi sapiente vape gastropub, deep v thundercats XOXO tumblr +1 subway tile.  Single-origin coffee occaecat  YOLO, gochujang celiac disrupt wayfarers you probably haven't heard of them artisan pabst.  Microdosing proident bicycle rights keffiyeh aesthetic.  Chartreuse tumeric waistcoat nulla.  Cray everyday carry sed pinterest microdosing poutine hashtag flannel.c="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+  <script src="assets/js/ie-emulation-modes-warning.js"></script>
 
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="assets/js/ie-emulation-modes-warning.js"></script>
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-  </head>
+</head>
 
-  <body>
+<body>
 
-    <div class="container">
-      <div class="header clearfix">
-        <nav id="menu">
-         
-        </nav>
-        <h3 class="text-muted">Arduino</h3>
-      </div>
+  <div class="container">
+    <div class="header clearfix">
+      <nav id="menu">
 
-      <div class="jumbotron">
-        <h2>Arduino RFID-出入記錄</h2>
-        <p class="lead">記錄</p>
-        
-      </div>
+      </nav>
+      <h3 class="text-muted">Arduino</h3>
+    </div>
 
-    
-
-      <footer class="footer">
-        <p>&copy; 2016 Robert HSU, Inc.</p>
-      </footer>
-
-    </div> <!-- /container -->
-
-
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
-    
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src = "dist/js/menu.js"></script>
-    <script>
-         var config = {
-            apiKey: "AIzaSyCBa3cc1A9mlWzDnG_0e9ltIcZhOWiA-tk",
-            authDomain: "arduinofirebase-6d104.firebaseapp.com",
-            databaseURL: "https://arduinofirebase-6d104.firebaseio.com",
-            storageBucket: "arduinofirebase-6d104.appspot.com",
-            messagingSenderId: "775007261514"
-         };
+    <div class="jumbotron">
+      <h2>Arduino RFID-出入記錄</h2>
+      <div class="list-group">
        
-        firebase.initializeApp(config);
-        var database = firebase.database();
-        var rfid1Ref = database.ref("rfid1");
-        
-        $(document).ready(function(){3
-              rfid1Ref.on('value',function(snapshot){
-                  var json = snapshot.val();
-                  for (var key in json){
-                    console.log(json[key]["id"]);
-                  }
-              });
-        });
-        
-    </script>
-    
-      
-  </body>
+      </div>
+
+    </div>
+
+
+
+    <footer class="footer">
+      <p>&copy; 2016 Robert HSU, Inc.</p>
+    </footer>
+
+  </div>
+  <!-- /container -->
+
+
+  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
+
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="dist/js/menu.js"></script>
+  <script>
+    var config = {
+      apiKey: "AIzaSyCBa3cc1A9mlWzDnG_0e9ltIcZhOWiA-tk",
+      authDomain: "arduinofirebase-6d104.firebaseapp.com",
+      databaseURL: "https://arduinofirebase-6d104.firebaseio.com",
+      storageBucket: "arduinofirebase-6d104.appspot.com",
+      messagingSenderId: "775007261514"
+    };
+
+    firebase.initializeApp(config);
+    var database = firebase.database();
+    var limitNum = 5;
+    var rfid1Ref = database.ref("rfid1").limitToLast(limitNum);
+
+    $(document).ready(function () {      
+      rfid1Ref.on('value', function (snapshot) {
+        $('div.list-group').empty();
+        var json = snapshot.val();
+        var i = 0;
+        for (var key in json) {
+          var active = "";
+          if (++i == limitNum){
+              active = "active";
+          }
+          $('<a href="#" class="list-group-item '+ active +'">'+
+          '<h4 class="list-group-item-heading">' + json[key]["id"] + '</h4>'+
+          '<p class="list-group-item-text">' +　'活動狀態：'+ json[key]["status"]+'</p>'+
+        '</a>').appendTo('div.list-group');
+        }
+      });
+    });
+  </script>
+
+
+</body>
+
 </html>
