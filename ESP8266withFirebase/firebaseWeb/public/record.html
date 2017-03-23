@@ -86,7 +86,7 @@
     firebase.initializeApp(config);
     var database = firebase.database();
     var limitNum = 5;
-    var rfid1Ref = database.ref("rfid1").limitToLast(limitNum);
+    var rfid1Ref = database.ref("rfid1").orderByKey().limitToLast(limitNum);
 
     $(document).ready(function () {      
       rfid1Ref.on('value', function (snapshot) {
@@ -101,7 +101,7 @@
           $('<a href="#" class="list-group-item '+ active +'">'+
           '<h4 class="list-group-item-heading">' + json[key]["id"] + '</h4>'+
           '<p class="list-group-item-text">' +　'活動狀態：'+ json[key]["status"]+'</p>'+
-        '</a>').appendTo('div.list-group');
+        '</a>').prependTo('div.list-group');
         }
       });
     });
