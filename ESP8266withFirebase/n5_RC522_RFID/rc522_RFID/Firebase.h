@@ -16,7 +16,7 @@ class Firebase{
   Firebase(const char* host);
   void connectedToWifi(const char* ssid,const char* password);
   void connectedToFirebase();
-  void postJSONData(String tagID,String url);
+  void postJSONData(String tagID);
   JsonObject* getJSONData(String url);  
 };
 #endif

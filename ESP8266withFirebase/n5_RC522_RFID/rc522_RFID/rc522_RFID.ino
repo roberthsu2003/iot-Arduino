@@ -101,7 +101,7 @@ void loop()
               id += "-";
             }
           }
-          firebase.postJSONData(id,"/rfid1.json");
+          firebase.postJSONData(id);
         } else {
           /* If we have the same ID, just write a dot. */
           Serial.print(".");
