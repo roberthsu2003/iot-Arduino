@@ -86,23 +86,51 @@
     firebase.initializeApp(config);
     var database = firebase.database();
     var limitNum = 5;
-    var rfid1Ref = database.ref("rfid1").orderByKey().limitToLast(limitNum);
+    var rfid1Ref = database.ref("rfid1/record").orderByKey().limitToLast(limitNum);
 
     $(document).ready(function () {      
       rfid1Ref.on('value', function (snapshot) {
         $('div.list-group').empty();
         var json = snapshot.val();
+        console.log(json);
         var i = 0;
-        for (var key in json) {
-          var active = "";
-          if (++i == limitNum){
-              active = "active";
+        
+          for (var key in json) {
+            var active = "";
+            if (++i == limitNum){
+                active = "active";
+            }
+            var keyName = json[key]["keyName"];
+            console.log(keyName);
+            /*
+            var rfid1TimeRef = database.ref("rfid1/time/" + keyName);          
+            rfid1TimeRef.once('value').then(function(snapshot){
+                time = snapshot.val();
+                console.log(time);
+              
+            });
+            */
+            
+            $('<a href="#" class="list-group-item '+ active +'">'+
+                '<h4 class="list-group-item-heading">' + json[key]["id"] + '</h4>'+
+                '<p class="list-group-item-text">' +　'活動狀態：'+ json[key]["status"]+'</p>'+
+                '<p class="list-group-item-text keyTime">' + keyName +'</p>' + 
+                '</a>').prependTo('div.list-group');
+            
           }
-          $('<a href="#" class="list-group-item '+ active +'">'+
-          '<h4 class="list-group-item-heading">' + json[key]["id"] + '</h4>'+
-          '<p class="list-group-item-text">' +　'活動狀態：'+ json[key]["status"]+'</p>'+
-        '</a>').prependTo('div.list-group');
-        }
+
+        //捉keyName,改為時間
+        $(".keyTime").each(function(index,elem){
+          var keyName = $(elem).text();
+          var rfid1TimeRef = database.ref("rfid1/time/" + keyName);          
+            rfid1TimeRef.once('value').then(function(snapshot){
+                var time = snapshot.val();
+                var date = new Date(time);
+                var dateString = "時間:" + date.getFullYear() + "/" + (date.getMonth()+1) + "/" +date.getDate() + "-" + date.getHours() + ":" +date.getMinutes() + "-" +date.getSeconds();
+               
+                $(elem).text(dateString);
+            }); 
+        });
       });
     });
   </script>
