@@ -126,7 +126,7 @@
             rfid1TimeRef.once('value').then(function(snapshot){
                 var time = snapshot.val();
                 var date = new Date(time);
-                var dateString = "時間:" + date.getFullYear() + "/" + (date.getMonth()+1) + "/" +date.getDate() + "-" + date.getHours() + ":" +date.getMinutes() + "-" +date.getSeconds();
+                var dateString = "時間:" + date.getFullYear() + "/" + (date.getMonth()+1) + "/" +date.getDate() + " - " + date.getHours() + ":" +date.getMinutes() + "-" +date.getSeconds();
                
                 $(elem).text(dateString);
             }); 
