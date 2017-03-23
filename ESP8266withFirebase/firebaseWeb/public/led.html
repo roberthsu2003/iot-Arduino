@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="robot.ico">
+
+    <title>Narrow Jumbotron Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="jumbotron-narrow.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="container">
+      <div class="header clearfix">
+        <nav id="menu">
+         
+        </nav>
+        <h3 class="text-muted">Led範例</h3>
+      </div>
+
+      <div class="jumbotron">
+        <h2>LED開關</h2>
+       <div class="btn-group btn-group-lg" role="group" aria-label="...">
+        <button type="button" class="btn btn-danger" id="openBtn">開</button>
+        <button type="button" class="btn btn-default" id="closeBtn">關</button>
+       
+        </div>
+
+        
+      </div>
+
+      
+
+      <footer class="footer">
+        <p>&copy; 2016 RobertHsu, Inc.</p>
+      </footer>
+
+    </div> <!-- /container -->
+
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
+   
+<script src="https://www.gstatic.com/firebasejs/3.7.2/firebase.js"></script>
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src = "dist/js/menu.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCBa3cc1A9mlWzDnG_0e9ltIcZhOWiA-tk",
+    authDomain: "arduinofirebase-6d104.firebaseapp.com",
+    databaseURL: "https://arduinofirebase-6d104.firebaseio.com",
+    storageBucket: "arduinofirebase-6d104.appspot.com",
+    messagingSenderId: "775007261514"
+  };
+  firebase.initializeApp(config);
+  var database = firebase.database();
+  var ledRef = database.ref("led/");
+$(document).ready(function(){
+    ledRef.once("value").then(function(snapshot){
+        console.log(snapshot.val().D2);
+        if(snapshot.val().D2){
+        $("#openBtn").trigger("click");
+        }else{
+         $("#closeBtn").trigger("click");
+        }
+    });
+    console.log("document ready");
+    $("#openBtn").click(function(){
+        console.log("openBtn click");
+        $("#closeBtn").removeClass().addClass("btn").addClass("btn-default");
+        $(this).removeClass().addClass("btn").addClass("btn-danger");
+        ledRef.update({"D2":true});
+    });
+    
+    $("#closeBtn").click(function(){
+        console.log("closeBtn click");
+         $("#openBtn").removeClass().addClass("btn").addClass("btn-default");
+        $(this).removeClass().addClass("btn").addClass("btn-danger");
+        ledRef.update({"D2":false});
+    });
+});
+</script>
+  </body>
+</html>
