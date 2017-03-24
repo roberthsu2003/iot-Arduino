@@ -6,7 +6,7 @@ const char* ssid = "Robert iphone";
 const char* password = "0926656000";
 const char* host="arduinofirebase-6d104.firebaseio.com";
 const int httpsPort = 443;
-#define D3 0
+#define D2 4
 String section;
 
 void setup()
@@ -89,9 +89,9 @@ void parseJSON(String line){
 
     if(strcmp(json_parsed["D2"],"true") == 0){
       Serial.println("LED ON");
-      digitalWrite(D3,HIGH);
+      digitalWrite(D2,HIGH);
     }else{
       Serial.println("LED OFF");
-      digitalWrite(D3,LOW);
+      digitalWrite(D2,LOW);
     }
 }
