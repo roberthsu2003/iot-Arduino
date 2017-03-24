@@ -11,7 +11,7 @@ String section;
 
 void setup()
 {
-  pinMode(D3,OUTPUT);
+  pinMode(D2,OUTPUT);
   Serial.begin(115200);
   Serial.println();
   //wifi連線
