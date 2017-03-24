@@ -7,14 +7,14 @@
             "request": "launch",
             "name": "Launch Chrome against localhost",
             "url": "http://localhost:3030",
-            "webRoot": "${workspaceRoot}"
+            "webRoot": "${workspaceRoot}/ESP8266withFirebase/firebaseWeb"
         },
         {
             "type": "chrome",
             "request": "attach",
             "name": "Attach to Chrome",
-            "port": 9222,
-            "webRoot": "${workspaceRoot}"
+            "port": 5000,
+            "webRoot": "${workspaceRoot}/ESP8266withFirebase/firebaseWeb"
         }
     ]
 }
