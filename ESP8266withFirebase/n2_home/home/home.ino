@@ -56,7 +56,7 @@ void setup() {
 
 void loop() {
     timer.update();
-    windowValue = configureWindow(D8);
+    windowValue = configureWindow(D3);
     humidityValue = getHumidity();
     temperatureValue = getTemperatureValue();
     soundValue = analogRead(SoundSensor);
