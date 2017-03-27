@@ -15,7 +15,7 @@
 #include <WiFiClientSecure.h>
 #include "Timer.h"
 #include <HTU21D.h>
-#define D8 0
+#define D3 0
 #define SoundSensor A0
 
 boolean windowValue = false;
@@ -24,8 +24,8 @@ float temperatureValue = 0.0;
 float soundValue = 0.0;
 
 
-const char* ssid = "robert_hsu_home";
-const char* password = "0926656000";
+const char* ssid = "robert_hsu";
+const char* password = "1234567890";
 
 
 const char* host = "arduinofirebase-6d104.firebaseio.com";
@@ -41,7 +41,7 @@ void setup() {
   wifiConnection();
 
   //window
-  pinMode(D8,INPUT_PULLUP);
+  pinMode(D3,INPUT_PULLUP);
   if (WiFi.status() == WL_CONNECTED){
     timer.every(2000,connectionFirebase);
     }else{
