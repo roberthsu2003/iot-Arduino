@@ -90,6 +90,8 @@ void connectionFirebase(){
   if (!client.connect(host, httpsPort)) {
     Serial.println("connection failed");
     return;
+  }else{
+    Serial.println("connection success");
   }
  
 
@@ -104,7 +106,6 @@ void connectionFirebase(){
   client.print("PUT " + url + " HTTP/1.1\r\n" +
                "Host: " + host + "\r\n" +
                "Content-Type: application/json\r\n" + 
-               "User-Agent: BuildFailureDetectorESP8266\r\n" + 
                "Content-Length:" + jsonString.length() +"\r\n\r\n" +               
                jsonString);
 
@@ -118,12 +119,8 @@ void connectionFirebase(){
       break;
     }
   }
-  String line = client.readStringUntil('\n');
-  if (line.startsWith("{\"state\":\"success\"")) {
-    Serial.println("esp8266/Arduino CI successfull!");
-  } else {
-    Serial.println("esp8266/Arduino CI has failed");
-  }
+  
+  String line = client.readStringUntil('\n');  
   Serial.println("reply was:");
   Serial.println("==========");
   Serial.println(line);
@@ -144,4 +141,3 @@ float getTemperatureValue(){
   float temp = myHumidity.readTemperature();
   return temp;
 }
-
