@@ -8,12 +8,15 @@
 // I2C address, width (in characters) and
 // height (in characters). Depending on the
 // Actual device, the IC2 address may change.
-//0 is SCA,2 is SDL
+//5 is SCL=D1,4 is SDA=D2
 //
-LiquidCrystal_I2C lcd(0x27, 0, 2);
-#define D8 0
-const char* ssid = "robert_hsu_home";
-const char* password = "0926656000";
+
+#define D1 5
+#define D2 4
+LiquidCrystal_I2C lcd(0x27, D1, D2);
+#define D0 16
+const char* ssid = "robert_hsu";
+const char* password = "1234567890";
 const char* host = "arduinofirebase-6d104.firebaseio.com";
 const int httpsPort = 443;
 String section;
@@ -41,7 +44,7 @@ void setup() {
   lcd.print("WORLD");
 
   //relay
-  pinMode(D8, OUTPUT);
+  pinMode(D0, OUTPUT);
 
   //esp8662
   
@@ -145,11 +148,11 @@ void parseJSON(String line){
       }
       // Make the decision to turn off or on the LED
       if (strcmp(json_parsed["relay1"], "true") == 0) {
-         digitalWrite(D8,HIGH);
+         digitalWrite(D0,HIGH);
          Serial.println("relay1 ON");
       }
       else {
-        digitalWrite(D8,LOW);
+        digitalWrite(D0,LOW);
         Serial.println("relay1 off");
       }
       lcd.clear();
@@ -161,5 +164,3 @@ void parseJSON(String line){
       lcd.print(line2);
     
 }
-
-
