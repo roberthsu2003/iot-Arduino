@@ -25,8 +25,8 @@ Timer timer;
 void setup() {
   wifiConnection();
   //lcd Setup
-  lcd.begin(16, 2);
-  lcd.init();
+  lcd.begin();
+  
 
   // Turn on the backlight.
   lcd.backlight();
