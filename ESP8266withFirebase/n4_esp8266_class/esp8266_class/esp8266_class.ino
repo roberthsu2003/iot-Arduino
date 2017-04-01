@@ -11,10 +11,9 @@ void loop() {
   // put your main code here, to run repeatedly:
   firebase.connectedToWifi("robert_hsu_home","0926656000");
   //firebase.getJSONData("/led.json");
-  JsonObject* parseJson= firebase.getJSONData("/lcd.json");
-  JsonObject& json = *parseJson;
-  
-  Serial.print("line2:");
-  Serial.println((const char*)json["line2"]);
+  JsonObject* parseJson = firebase.getJSONData("/led.json");
+  JsonObject& json = *parseJson;  
+  Serial.print("D2");
+  Serial.println((const char*)json["D2"]);
   delay(1000);
 }
