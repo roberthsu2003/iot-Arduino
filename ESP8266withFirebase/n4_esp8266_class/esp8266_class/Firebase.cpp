@@ -57,7 +57,7 @@ void Firebase::connectedToWifi(const char* ssid,const char* password){
 
       Serial.println("----------------data-------------");
       String section = "header";
-      
+      String receiveLine;
       while(client.available()){
         String line = client.readStringUntil('\r');
         if(section == "header"){
@@ -68,31 +68,33 @@ void Firebase::connectedToWifi(const char* ssid,const char* password){
           }
           continue;                  
         }
-       Serial.print("line:");
-       Serial.println(line);
-       String result = line.substring(1);//前面有一個換行字元
+        receiveLine = line;
+      }
+       Serial.print("receiveLine:");
+       Serial.println(receiveLine);       
+       String result = receiveLine.substring(1);//前面有一個換行字元
        Serial.print("result:");
        Serial.println(result);
        int size = result.length() + 1;//c字串內最後要加一個"/0"
        char json[size];
        result.toCharArray(json,size);
-       StaticJsonBuffer<200> jsonBuffer;
+      
+       
+       StaticJsonBuffer<200> jsonBuffer;       
        JsonObject& json_parsed = jsonBuffer.parseObject(json);
        if(!json_parsed.success()){
         Serial.println();
         Serial.println("parseObject() failed");
         return nullptr;
        }else{
-        Serial.println("closing connection");
-        //const char* d2State = json_parsed["D2"];        
+        Serial.println("closing connection");                 
         return &json_parsed;        
        }
+       
         
-      }
+      
       Serial.println("closing connection");
      
-    }else{
-      return nullptr;
     }
  }
 
