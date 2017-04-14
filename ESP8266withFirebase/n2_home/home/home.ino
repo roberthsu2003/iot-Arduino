@@ -24,8 +24,8 @@ float temperatureValue = 0.0;
 float soundValue = 0.0;
 
 
-const char* ssid = "robert_hsu";
-const char* password = "1234567890";
+const char* ssid = "robert_hsu_home";
+const char* password = "0926656000";
 
 
 const char* host = "arduinofirebase-6d104.firebaseio.com";
