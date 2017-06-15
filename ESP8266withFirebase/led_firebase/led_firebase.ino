@@ -2,9 +2,9 @@
 #include <WiFiClientSecure.h>
 #include <ArduinoJson.h>
 
-const char* ssid = "Robert iphone";
-const char* password = "0926656000";
-const char* host="arduinofirebase-6d104.firebaseio.com";
+const char* ssid = "Wifi id";
+const char* password = "wifi passwor";
+const char* host="firebase host";
 const int httpsPort = 443;
 #define D2 4
 String section;
@@ -15,7 +15,7 @@ void setup()
   Serial.begin(115200);
   Serial.println();
   //wifi連線
-  WiFi.begin("Robert iphone", "0926656000");
+  WiFi.begin(ssid, password);
   Serial.print("Connecting");
   while (WiFi.status() != WL_CONNECTED)
   {
