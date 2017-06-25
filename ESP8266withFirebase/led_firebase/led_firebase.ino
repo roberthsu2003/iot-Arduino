@@ -1,97 +1,34 @@
 #include <ESP8266WiFi.h>
-#include <WiFiClientSecure.h>
-#include <ArduinoJson.h>
+#include <FirebaseArduino.h>
 
-const char* ssid = "Wifi id";
-const char* password = "wifi passwor";
-const char* host="firebase host";
-const int httpsPort = 443;
 #define D2 4
-String section;
+#define FIREBASE_HOST "網站"
+#define WIFI_SSID "熱點名"
+#define WIFI_PASSWORD "熱點密碼"
 
-void setup()
-{
-  pinMode(D2,OUTPUT);
+void setup() {
   Serial.begin(115200);
-  Serial.println();
-  //wifi連線
-  WiFi.begin(ssid, password);
-  Serial.print("Connecting");
-  while (WiFi.status() != WL_CONNECTED)
-  {
-    delay(500);
+  //連線到Wifi
+  WiFi.begin(WIFI_SSID,WIFI_PASSWORD);
+  Serial.print("開始連線");
+  while(WiFi.status() != WL_CONNECTED){
     Serial.print(".");
+    delay(500);
   }
   Serial.println();
-  Serial.print("Connected, IP address: ");
-  Serial.println(WiFi.localIP());
+  Serial.print("連線成功:");
+  Serial.print(WiFi.localIP());
+  pinMode(D2,OUTPUT);
+  Firebase.begin(FIREBASE_HOST);
 }
 
 void loop() {
-  if(WiFi.status() == WL_CONNECTED){
-    Serial.println("wifi connected");
-    WiFiClientSecure client;
-    //連線到firebase
-    client.connect(host,httpsPort);
-    Serial.print("connecting to");
-    Serial.println(host);
-    while(client.connected() == false){
-      Serial.println("not connect to host");
-    }
-    Serial.println("connect to host");
-    
-    String url = "/led.json";
-    client.print(
-      "GET " + url + " HTTP/1.1\r\n" +
-      "Host: " + host + "\r\n" +      
-      "Connection: close\r\n\r\n"  
-    );
-    Serial.println("request send");
-    while(client.available() == 0){
-      Serial.print("wait data. ");
-    }
-
-    Serial.println("------------------------data--------------------");
-    section = "header";
-    while(client.available()){
-      String line = client.readStringUntil('\r');
-      parseJSON(line);
-    }
-    Serial.println();
-    Serial.println("============================");
-    Serial.println("closing connection");
+  bool d2Value = Firebase.getBool("led/D2");
+  if (Firebase.success() == false){
+    Serial.print("取得led/D2失敗，重新執行");
+    return;
   }
-  delay(100);
-}
+  digitalWrite(D2,d2Value);
+  delay(200); 
 
-void parseJSON(String line){
-    if(section == "header"){
-      //Serial.print(".");
-      Serial.print(line);
-      if(line == "\n"){
-        section = "json";
-      }
-      return;
-    }
-
-    Serial.println(line);
-    String result = line.substring(1);
-    int size = result.length() + 1;
-    char json[size];
-    result.toCharArray(json,size);
-    StaticJsonBuffer<200> jsonBuffer;
-    JsonObject& json_parsed = jsonBuffer.parseObject(json);
-    if(!json_parsed.success()){
-      Serial.println();
-      Serial.println("parseObject() failed");
-      return;
-    }
-
-    if(strcmp(json_parsed["D2"],"true") == 0){
-      Serial.println("LED ON");
-      digitalWrite(D2,HIGH);
-    }else{
-      Serial.println("LED OFF");
-      digitalWrite(D2,LOW);
-    }
 }
