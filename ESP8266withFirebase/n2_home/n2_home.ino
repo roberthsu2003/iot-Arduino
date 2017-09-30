@@ -3,8 +3,8 @@
 #include <ESP8266WiFi.h>
 
 #define FIREBASE_HOST "arduinofirebase-6d104.firebaseio.com"
-#define WIFI_SSID "robert_hsu"
-#define WIFI_PASSWORD "1234567890"
+#define WIFI_SSID "iPhone"
+#define WIFI_PASSWORD "0926656000"
 #define D3 0
 #define soundSensor A0
 
@@ -40,8 +40,18 @@ void loop() {
   // put your main code here, to run repeatedly:
   windowValue = digitalRead(D3);
   humidityValue = myHumidity.readHumidity();
+  Serial.print("humidityValue:");
+  Serial.println(humidityValue);
+  
   temperatureValue = myHumidity.readTemperature();
+
+  Serial.print("temperatureValue:");
+  Serial.println(temperatureValue);
+  
   soundValue = analogRead(soundSensor);
+  Serial.print("soundValue:");
+  Serial.println(soundValue);
+  
   Firebase.setBool("home/window",windowValue);
   Firebase.setFloat("home/humidity",humidityValue);
   Firebase.setFloat("home/temp",temperatureValue);
