@@ -1,83 +1,50 @@
 #include "Button.h"
 
-#include <LiquidCrystal_I2C.h>
-
-LiquidCrystal_I2C lcd(0x27, 2, 1, 0, 4, 5, 6, 7, 3, POSITIVE);
-
-Button btnS3(9, INPUT_PULLUP);
-unsigned int lastTimes = 10000;
-
-void DoJob1();
-void DoJob2();
-void DoJob3();
-void runButton();
+#define ledPin 13
 
 
 
+
+//使用lambda=暱名function
+Button buttonS3(A1, [](long int pressNumber) {
+  //Serial.println(pressNumber);
+  switch (pressNumber % 6){
+    case 2:
+      Serial.println("S3 First");
+      break;
+    case 4:
+      Serial.println("S3 Second");
+      break;
+    case 0:
+      Serial.println("S3 Third");
+      break;
+  }
+});
+
+Button buttonS4(A0, [](long int pressNumber){
+  switch (pressNumber % 4){
+    case 2:
+      Serial.println("S4 First");
+      break;
+    
+    case 0:
+      Serial.println("S4 Second");
+      break;
+  }
+  });
 
 void setup() {
-  // put your setup code here, to run once:
-  Serial.begin(115200);  
-  callBackType a[] = {DoJob1,DoJob2,DoJob3};
-  btnS3.setup(a,3);
-  
-  lcd.begin(16, 2);
-  lcd.backlight();
-
-  pinMode(A2,INPUT_PULLUP);
- 
-
-  
+  Serial.begin(115200);
+  //Serial.print(buttonS1.getButtonPin());
+  pinMode(ledPin, OUTPUT);
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-   btnS3.buttonRunning();
-   
+  buttonS3.running();
+  buttonS4.running();
+
 }
-
-
-
-
-
-void DoJob1() {
-  Serial.println("one");  
-  
-  
-  
-  lcd.clear();
-  lcd.setCursor(0, 0); // 設定游標位置在第一行行首
-  lcd.print("light");  
-  lcd.setCursor(0, 1); // 設定游標位置在第二行行首
-  int val = analogRead(A2);
-  Serial.println(val);
-  lcd.print(val); 
-  
-}
-
-void DoJob2() {
- Serial.println("two");
- lcd.clear();
- lcd.setCursor(0, 0); // 設定游標位置在第一行行首
- lcd.print("Welcome!");
-
-  lcd.setCursor(0, 1); // 設定游標位置在第二行行首
-  lcd.print("Two");
-}
-
-void DoJob3() {
-  Serial.println("three");
-  lcd.clear();
-  lcd.setCursor(0, 0); // 設定游標位置在第一行行首
-  lcd.print("Welcome!");
-
-  lcd.setCursor(0, 1); // 設定游標位置在第二行行首
-  lcd.print("Three");
-}
-
-
-
-
 
 
 
