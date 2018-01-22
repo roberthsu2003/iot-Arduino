@@ -5797,5 +5797,7 @@ button.close {
 @media print {
   .hidden-print {
     display: none !important; } }
+.ledControl {
+  margin: 10%; }
 
 /*# sourceMappingURL=app.css.map */
