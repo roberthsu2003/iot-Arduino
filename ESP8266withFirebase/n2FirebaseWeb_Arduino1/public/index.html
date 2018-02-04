@@ -50,19 +50,48 @@
     <div class="container">
       <!-- Example row of columns -->
       <div class="row">
+        <!--雲端控制繼電器電燈 開始-->
         <div class="col-md-4">
-          <h2>控制雲端電燈</h2>
+          
+          <h2>雲端控制繼電器電燈</h2>
+          <h3><span class="label label-primary">繼電器1</span></h3>
           <div class="btn-group btn-group-lg ledControl" role="group" aria-label="LED">
-            <button type="button" class="btn btn-default " id="openBtn">開</button>
-            <button type="button" class="btn btn-danger" id="closeBtn">關</button>
+            <button type="button" class="btn btn-default " id="relay1OpenBtn">開</button>
+            <button type="button" class="btn btn-danger" id="relay1CloseBtn">關</button>
            
           </div>
+
+          <h3><span class="label label-primary">繼電器2</span></h3>
+          <div class="btn-group btn-group-lg ledControl" role="group" aria-label="LED">
+            <button type="button" class="btn btn-default " id="relay2OpenBtn">開</button>
+            <button type="button" class="btn btn-danger" id="relay2CloseBtn">關</button>
+           
+          </div>
+
         </div>
+        <!--雲端控制繼電器電燈 結束-->
+        <!--LCD控制欄位 開始-->
         <div class="col-md-4">
-          <h2>控制雲端電燈</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-       </div>
+          <h2>LCD控制欄位</h2>
+          <div class="input-group input-group-lg">
+              <span class="input-group-addon" id="sizing-addon1">LCD欄位1</span>
+              <input type="text" class="form-control" placeholder="Username" aria-describedby="sizing-addon1" id="line1Field">
+              <span class="input-group-btn">
+                  <button class="btn btn-default" type="button" id="line1Btn">Go!</button>
+              </span>
+          </div>
+          <br>
+          <br>
+          <div class="input-group input-group-lg">
+              <span class="input-group-addon" id="sizing-addon1">LCD欄位2</span>
+              <input type="text" class="form-control" placeholder="Username" aria-describedby="sizing-addon1" id="line2Field">
+              <span class="input-group-btn">
+                  <button class="btn btn-default" type="button" id="line2Btn">Go!</button>
+              </span>
+          </div>
+          
+        </div>
+       <!--LCD控制欄位 結束-->
         <div class="col-md-4">
           <h2>Heading</h2>
           <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
@@ -94,36 +123,81 @@
       storageBucket: "arduinofirebase-6d104.appspot.com",
       messagingSenderId: "775007261514"
     };
-      firebase.initializeApp(config);
-    //------------- LED Control start--------------------
+    firebase.initializeApp(config);
+    //------------- Relay Control start--------------------
     $(document).ready(function(){
     
     var database = firebase.database();
-    var ledRef = database.ref('led/');
-    ledRef.on('value',function(snapShop){
-        if(snapShop.val().D2){
-            $('#openBtn').trigger('click');
+    var lcdRef = database.ref('lcd/');
+    lcdRef.on('value',function(snapshot){
+        var lcdData = snapshot.val();
+        //console.log(lcdData.line1);
+        //console.log(lcdData.line2);
+        //console.log(lcdData.relay1);
+        //console.log(lcdData.relay2);
+        $('#line1Field').val(lcdData.line1);
+        $('#line2Field').val(lcdData.line2);
+        if(lcdData.relay1){
+          $('#relay1OpenBtn').trigger("click");
         }else{
-            $('#closeBtn').trigger('click');
+          $('#relay1CloseBtn').trigger("click");
         }
+
+
+        if(lcdData.relay2){
+          $('#relay2OpenBtn').trigger("click");
+        }else{
+          $('#relay2CloseBtn').trigger("click");
+        }
+        
+        
     });
 
-    $('#openBtn').click(function(){
-        $('.ledControl button').removeClass().addClass('btn');
-        $(this).addClass('btn-danger');
-        $('#closeBtn').addClass('btn-default');
-        ledRef.update({"D2":true});
+    $('#line1Btn').click(function(){
+      var line1String = $('#line1Field').val();
+      var line1Ref = database.ref("lcd/line1");
+      line1Ref.set(line1String);
     });
 
-    $('#closeBtn').click(function(){
-        $('.ledControl button').removeClass().addClass('btn');
-        $(this).addClass('btn-danger');
-        $('#openBtn').addClass('btn-default');
-        ledRef.update({"D2":false});
+    $('#line2Btn').click(function(){
+      var line2String = $('#line2Field').val();
+      var line2Ref = database.ref("lcd/line2");
+      line2Ref.set(line2String);
     });
+
+    var relay1Ref = database.ref("lcd/relay1");
+        $('#relay1OpenBtn').click(function(){
+          $(this).removeClass().addClass('btn').addClass('btn-danger');
+          $('#relay1CloseBtn').removeClass().addClass('btn').addClass('btn-default');
+          relay1Ref.set(true);
+        });
+
+        $('#relay1CloseBtn').click(function(){
+          $(this).removeClass().addClass('btn').addClass('btn-danger');
+          $('#relay1OpenBtn').removeClass().addClass('btn').addClass('btn-default');
+          relay1Ref.set(false);
+        });
+
+
+        var relay2Ref = database.ref("lcd/relay2");
+        $('#relay2OpenBtn').click(function(){
+          $(this).removeClass().addClass('btn').addClass('btn-danger');
+          $('#relay2CloseBtn').removeClass().addClass('btn').addClass('btn-default');
+          relay2Ref.set(true);
+        });
+
+        $('#relay2CloseBtn').click(function(){
+          $(this).removeClass().addClass('btn').addClass('btn-danger');
+          $('#relay2OpenBtn').removeClass().addClass('btn').addClass('btn-default');
+          relay2Ref.set(false);
+        });
+
+
+
+    
 });
 
- //------------- LED Control end--------------------
+ //------------- Relay Control end--------------------
   </script>
   
   </body>
