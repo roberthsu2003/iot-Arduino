@@ -5800,4 +5800,9 @@ button.close {
 .ledControl {
   margin: 10%; }
 
+.smartHome button {
+  font-size: 150%; }
+  .smartHome button .badge {
+    font-size: 70%; }
+
 /*# sourceMappingURL=app.css.map */
