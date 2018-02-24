@@ -51,7 +51,7 @@
       <!-- Example row of columns -->
       <div class="row">
         <!--雲端控制繼電器電燈 開始-->
-        <div class="col-md-4">
+        <div class="col-md-4 col-sm-6">
           
           <h2>雲端控制繼電器電燈</h2>
           <h3><span class="label label-primary">繼電器1</span></h3>
@@ -71,7 +71,7 @@
         </div>
         <!--雲端控制繼電器電燈 結束-->
         <!--LCD控制欄位 開始-->
-        <div class="col-md-4">
+        <div class="col-md-4 col-sm-6">
           <h2>LCD控制欄位</h2>
           <div class="input-group input-group-lg">
               <span class="input-group-addon" id="sizing-addon1">LCD欄位1</span>
@@ -94,7 +94,7 @@
        <!--LCD控制欄位 結束-->
 
        <!-- 智慧家庭控制 開始-->
-        <div class="col-md-4 smartHome">
+        <div class="col-md-4 smartHome col-sm-6">
           <br/>
           <h2>智慧家庭控制</h2>
 
@@ -122,13 +122,31 @@
          <!-- 智慧家庭控制 結束-->
       </div>
 
-      <hr>
+      
+     
+    </div><!-- /container -->
 
-      <footer>
-        <p>&copy; 2016 Company, Inc.</p>
-      </footer>
-    </div> <!-- /container -->
+    <div class="container">
+      <h2>RFID控制</h2>
+      <div class="row">
+        <!--雲端控制RFID 開始-->
+        <div class="col-md-12  col-sm-12 " id="records">
+          
+          
 
+          <p>
+            <span class="label label-primary">日期時間:2017/07/12 13:52:50 -- 識別帳號:4A-78-3F-56-3D</span>
+          </p>
+          
+          
+        </div>
+        <!--雲端控制RFID 結束-->
+      </div>
+    </div><!-- /container -->
+    <hr>
+    <footer>
+      <p>&copy; 2016 Company, Inc.</p>
+    </footer>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -235,6 +253,53 @@
     });
  });
  //------------- Home Control start--------------------
+
+
+ //------------- RFID Control start--------------------
+  $(document).ready(function(){
+    var recordsRef = database.ref("rfid/records");
+    let limitedCount = 5;
+    var sortedRecords = recordsRef.orderByKey().limitToLast(limitedCount);
+    sortedRecords.on('value',function(snapshot){
+      $('#records').empty();
+      var json = snapshot.val();
+      var i = 0;
+      var active = false;//note最後一筆
+      for (key in json){
+        if(++i == limitedCount){
+          active = true;
+        }else{
+          active = false;
+        }
+
+        var item = json[key];
+        var cardID;
+        var time;
+        
+        for (key in item){
+          if(key == "card"){
+            cardID = item[key];
+          }else{
+            time = item[key];
+          }
+        }
+
+        var date = new Date(time);
+        var dateString = date.getFullYear() + "/" + (date.getMonth() + 1) + "/" +  date.getDate() + "-" + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+        /*
+        <p class="bg-danger">
+            <span>日期時間:2017/07/12 13:52:50 -- 識別帳號:4A-78-3F-56-3D</span>
+        </p>
+        */
+
+        $('<p class="' +(active ? 'bg-danger' : 'bg-primary') + '">' + '<span>日期時間:' + dateString + '</span><br/>' + '<span>識別帳號:' + cardID + '</span></p>').prependTo('#records');
+
+      }
+
+      $('#records p.bg-danger').hide().show(500);
+    });
+  });
+ //------------- RFID Control end--------------------
   </script>
   
   </body>
