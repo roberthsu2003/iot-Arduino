@@ -2,9 +2,10 @@
 #include <FirebaseArduino.h>
 #include <ESP8266WiFi.h>
 
-#define FIREBASE_HOST "arduinofirebase-6d104.firebaseio.com"
-#define WIFI_SSID "iPhone"
-#define WIFI_PASSWORD "0926656000"
+#define FIREBASE_HOST ""
+#define WIFI_SSID ""
+#define FIREBASE_AUTH ""
+#define WIFI_PASSWORD ""
 #define D3 0
 #define soundSensor A0
 
@@ -30,7 +31,7 @@ void setup() {
   Serial.print("connected: ");
   Serial.println(WiFi.localIP());
   
-  Firebase.begin(FIREBASE_HOST);
+  Firebase.begin(FIREBASE_HOST,FIREBASE_AUTH);
 
   pinMode(D3,INPUT_PULLUP);
   myHumidity.begin();
@@ -51,6 +52,8 @@ void loop() {
   soundValue = analogRead(soundSensor);
   Serial.print("soundValue:");
   Serial.println(soundValue);
+  Serial.print("windowValue");
+  Serial.println(windowValue);
   
   Firebase.setBool("home/window",windowValue);
   Firebase.setFloat("home/humidity",humidityValue);
