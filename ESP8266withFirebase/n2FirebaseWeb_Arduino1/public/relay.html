@@ -12,7 +12,7 @@
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="index1.html">Arduino 智慧家庭控制</a>
+        <a class="navbar-brand" href="index.html">Arduino 智慧家庭控制</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -21,13 +21,16 @@
           <ul class="navbar-nav mr-auto">
             
             <li class="nav-item">
-              <a class="nav-link" href="relay.html">RELAY控制</a>
+              <a class="nav-link" href="#">RELAY控制</a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="lcd.html">LCD控制</a>
             </li>
             
+            <li class="nav-item">
+              <a class="nav-link" href="home.html">智慧監控</a>
+           </li>
             
           </ul>
           
@@ -131,29 +134,25 @@
 
           //relay1 open button click
           $('#relay1openBtn').click(function(){
-            $(this).removeClass().addClass('btn').addClass('btn-danger').addClass('btn-lg');
-            $('#relay1closeBtn').removeClass().addClass('btn').addClass('btn-default').addClass('btn-lg');
+          
             relay1Ref.set(true);
           });
 
           //relay1 close button click
           $('#relay1closeBtn').click(function(){
-            $(this).removeClass().addClass('btn').addClass('btn-danger').addClass('btn-lg');
-            $('#relay1openBtn').removeClass().addClass('btn').addClass('btn-default').addClass('btn-lg');
+            
             relay1Ref.set(false);
           });
 
           //relay2 open button click
           $('#relay2openBtn').click(function(){
-            $(this).removeClass().addClass('btn').addClass('btn-danger').addClass('btn-lg');
-            $('#relay2closeBtn').removeClass().addClass('btn').addClass('btn-default').addClass('btn-lg');
+            
             relay2Ref.set(true);
           });
 
           //relay2 close button click
           $('#relay2closeBtn').click(function(){
-            $(this).removeClass().addClass('btn').addClass('btn-danger').addClass('btn-lg');
-            $('#relay2openBtn').removeClass().addClass('btn').addClass('btn-default').addClass('btn-lg');
+           
             relay2Ref.set(false);
           });
         });
