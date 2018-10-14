@@ -1,101 +1,77 @@
 #include <SPI.h>
-#include <RFID.h>
+#include <MFRC522.h>     // 引用程式庫
 #include <FirebaseArduino.h>
-#include <ESP8266WiFi.h>
+#include<ESP8266WiFi.h>
 
-#define SS_PIN 15
-#define RST_PIN 16
+
+#define RST_PIN      D0        // 讀卡機的重置腳位
+#define SS_PIN       D8        // 晶片選擇腳位
 #define FIREBASE_HOST "arduinofirebase-6d104.firebaseio.com"
+#define FIREBASE_PWD "z5lPWwjZLZuNNcUEelbJdiNaIvnR2Zfq49BuQBAa"
 #define WIFI_SSID "robert_hsu"
 #define WIFI_PASSWORD "1234567890"
 
-RFID rfid(SS_PIN, RST_PIN);
-
-
-int serNum0;
-int serNum1;
-int serNum2;
-int serNum3;
-int serNum4;
-
-unsigned long lastTime = millis();
+MFRC522 mfrc522(SS_PIN, RST_PIN);  // 建立MFRC522物件
+StaticJsonBuffer<200> jsonBuffer;
 
 void setup() {
-  // put your setup code here, to run once:
   Serial.begin(115200);
+  Serial.println("RFID reader is ready!");
+
   SPI.begin();
-  rfid.init();
-  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+  mfrc522.PCD_Init();   // 初始化MFRC522讀卡機模組
+
+  WiFi.begin(WIFI_SSID,WIFI_PASSWORD);
   Serial.print("connecting");
-  while (WiFi.status() != WL_CONNECTED) {
+  while (WiFi.status() != WL_CONNECTED){
     Serial.print(".");
     delay(500);
   }
-  Serial.println();
-  Serial.print("connected: ");
-  Serial.println(WiFi.localIP());
 
-  Firebase.begin(FIREBASE_HOST);
+  Serial.println();
+  Serial.print("connected:");
+  Serial.println(WiFi.localIP());
+  Firebase.begin(FIREBASE_HOST,FIREBASE_PWD);
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-  if (millis() - lastTime > 1000) {
-    lastTime = millis();
-    if (rfid.isCard()) {
-      if (rfid.readCardSerial()) {
-        if (rfid.serNum[0] != serNum0 || rfid.serNum[1] != serNum1 || rfid.serNum[2] != serNum2 || rfid.serNum[3] != serNum3 || rfid.serNum[4] != serNum4) {
-          Serial.println(" ");
-          Serial.println("Card found");
-          serNum0 = rfid.serNum[0];
-          serNum1 = rfid.serNum[1];
-          serNum2 = rfid.serNum[2];
-          serNum3 = rfid.serNum[3];
-          serNum4 = rfid.serNum[4];
-          /*
-          Serial.println("Cardnumber:");
-          Serial.print(rfid.serNum[0], HEX);
-          Serial.print(", ");
+    // 確認是否有新卡片
+    if (mfrc522.PICC_IsNewCardPresent() && mfrc522.PICC_ReadCardSerial()) {
+      byte *id = mfrc522.uid.uidByte;   // 取得卡片的UID
+      byte idSize = mfrc522.uid.size;   // 取得UID的長度
 
-          Serial.print(rfid.serNum[1], HEX);
-          Serial.print(", ");
+      Serial.print("PICC type: ");      // 顯示卡片類型
+      // 根據卡片回應的SAK值（mfrc522.uid.sak）判斷卡片類型
+      MFRC522::PICC_Type piccType = mfrc522.PICC_GetType(mfrc522.uid.sak);
+      Serial.println(mfrc522.PICC_GetTypeName(piccType));
 
-          Serial.print(rfid.serNum[2], HEX);
-          Serial.print(", ");
-
-          Serial.print(rfid.serNum[3], HEX);
-          Serial.print(", ");
-
-          Serial.print(rfid.serNum[4], HEX);
-        */
-        StaticJsonBuffer<200> jsonBuffer; 
-          JsonObject& dataObject = jsonBuffer.createObject();       
-          
-         // dataObject["card"] =((String)serNum0 + "-" + (String)serNum1).c_str();
-         String id = "";
-         for(int i=0;i<=4;i++){
-          char charVal[2];
-          sprintf(charVal,"%2x",rfid.serNum[i]);
-          id += String(charVal);
-          if(i != 4){
-            id += "-";
-          }
-         }
-          char data[id.length()+1];
-          id.toCharArray(data,id.length()+1);
-          
-          
-          dataObject["card"] =  data;
-          
-        String key = Firebase.push("rfid/records/",dataObject);
-        JsonObject& timeStampObject = jsonBuffer.createObject();
-        timeStampObject[".sv"] = "timestamp";
-        Serial.println("rfid/records/" + key);
-        Firebase.push("rfid/records/" + key,timeStampObject);
-        //Serial.println(key);
+      Serial.print("UID Size: ");       // 顯示卡片的UID長度值
+      Serial.println(idSize);
+      String cardID = "";
+      for (byte i = 0; i < idSize; i++) {  // 逐一顯示UID碼
+        Serial.print("id[");
+        Serial.print(i);
+        Serial.print("]: ");
+        Serial.println(id[i], HEX);       // 以16進位顯示UID值
+        cardID.concat(String(id[i],HEX));
+        if (i != (idSize-1)){
+          cardID.concat("-");
         }
       }
-    }
+      Serial.println();
+      Serial.println(cardID);
 
-  }
+      mfrc522.PICC_HaltA();  // 讓卡片進入停止模式
+
+      //create json
+      JsonObject& cardIdObject = jsonBuffer.createObject();
+      cardIdObject["cardID"] = cardID;
+      
+
+      String key = Firebase.push("rfid/records/",cardIdObject);
+      JsonObject& timeStampObject = jsonBuffer.createObject();
+      timeStampObject[".sv"] = "timestamp";
+      Firebase.push("rfid/records/" + key ,timeStampObject);
+      Serial.println(key);
+    } 
 }
