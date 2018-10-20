@@ -76,5 +76,14 @@ void loop() {
     cardIdObject["timeStamp"] = timeStampObject;
     
     Firebase.push("rfid/records/", cardIdObject);
+      
+      //create inRecords
+     jsonBuffer.clear(); //need clear butter
+    
+     JsonObject& timeObject = jsonBuffer.createObject();
+     timeObject[".sv"] = "timestamp";
+    
+
+     Firebase.push("rfid/inRecords/"+cardID,timeObject);
     } 
 }
