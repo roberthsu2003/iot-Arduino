@@ -63,15 +63,18 @@ void loop() {
 
       mfrc522.PICC_HaltA();  // 讓卡片進入停止模式
 
-      //create json
-      JsonObject& cardIdObject = jsonBuffer.createObject();
-      cardIdObject["cardID"] = cardID;
       
+      
+       //create Json
+    jsonBuffer.clear(); //need clear butter
+    JsonObject& cardIdObject = jsonBuffer.createObject();
+    cardIdObject["cardID"] = cardID;
 
-      String key = Firebase.push("rfid/records/",cardIdObject);
-      JsonObject& timeStampObject = jsonBuffer.createObject();
-      timeStampObject[".sv"] = "timestamp";
-      Firebase.push("rfid/records/" + key ,timeStampObject);
-      Serial.println(key);
+    
+    JsonObject& timeStampObject = jsonBuffer.createObject();
+    timeStampObject[".sv"] = "timestamp";
+    cardIdObject["timeStamp"] = timeStampObject;
+    
+    Firebase.push("rfid/records/", cardIdObject);
     } 
 }
