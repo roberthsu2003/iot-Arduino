@@ -1,33 +1,18 @@
-#define GREEN 13
-#define RED 12
-#define BLUE 11
-void blink1();
+#include "GreenRedBlue.h"
+
+GreenRedBlue threeOfLed;
 
 void setup() {
-  // put your setup code here, to run once:
-  pinMode(GREEN, OUTPUT);
-  pinMode(RED, OUTPUT);
-  pinMode(BLUE, OUTPUT);
   Serial.begin(115200);
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  blink1();
-  Serial.println("end");
-}
-
-void blink1() {
-  digitalWrite(GREEN, HIGH);
-  delay(300);
-  digitalWrite(RED, HIGH);
-  delay(300);
-  digitalWrite(BLUE, HIGH);
-  delay(300);
-  digitalWrite(BLUE, LOW);
-  delay(300);
-  digitalWrite(RED, LOW);
-  delay(300);
-  digitalWrite(GREEN, LOW);
-  delay(300);
+ Serial.print("Green:");
+ Serial.println(threeOfLed.greenLed);
+ Serial.print("Red:");
+ Serial.println(threeOfLed.redLed);
+ Serial.print("Blue:");
+ Serial.println(threeOfLed.blueLed);
+ delay(1000);
 }
