@@ -8,12 +8,13 @@ void setup() {
   pinMode(GREEN, OUTPUT);
   pinMode(RED, OUTPUT);
   pinMode(BLUE, OUTPUT);
+  Serial.begin(115200);
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
   blink1();
-
+  Serial.println("end");
 }
 
 void blink1() {
