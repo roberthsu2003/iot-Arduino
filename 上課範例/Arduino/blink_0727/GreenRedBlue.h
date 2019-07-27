@@ -3,10 +3,11 @@
 
 class GreenRedBlue{
   public:
-  int greenLed = 13;
-  int redLed = 12;
-  int blueLed = 11;
-  
+  int greenLed;
+  int redLed;
+  int blueLed;
+  //建立建構式
+  GreenRedBlue(int green, int red, int blue);
 };
 
 #endif

@@ -1,6 +1,7 @@
 #include "GreenRedBlue.h"
 
-GreenRedBlue threeOfLed;
+GreenRedBlue threeOfLed(13, 12, 11);
+
 
 void setup() {
   Serial.begin(115200);
