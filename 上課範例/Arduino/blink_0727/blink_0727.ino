@@ -8,5 +8,8 @@ void setup() {
 }
 
 void loop() {
-  threeOfLed.blink1(1000);
+  threeOfLed.blink1(200);
+  delay(100);
+  threeOfLed.blink2(200);
+  delay(100);
 }

@@ -15,6 +15,7 @@ class GreenRedBlue{
   
   //method方法
   void blink1(long interval);
+  void blink2(long interval);
 };
 
 #endif
