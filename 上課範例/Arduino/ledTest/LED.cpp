@@ -26,3 +26,13 @@ void LED::blink(long interval){
     _startTime = currentTime;
   }
 }
+
+
+
+void LED::autoBlink(){
+  if(_state == true){
+      off();
+    }else{
+      on();
+    }
+}
