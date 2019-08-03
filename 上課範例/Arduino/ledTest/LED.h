@@ -8,6 +8,8 @@ class LED{
 
   public:
   LED(byte pinNum);
+  void on();
+  void off();
   
 };
 #endif
