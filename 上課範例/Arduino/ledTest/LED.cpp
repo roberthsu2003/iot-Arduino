@@ -1,19 +1,28 @@
 #include "LED.h"
 LED::LED(byte pinNum){
-  pin = pinNum;
-  pinMode(pin,OUTPUT);
+  _pin = pinNum;
+  _startTime = millis();
+  pinMode(_pin,OUTPUT);
 }
 
 void LED::on(){
-  digitalWrite(pin,HIGH);
+  _state = true;
+  digitalWrite(_pin,HIGH);
 }
 void LED::off(){
-  digitalWrite(pin,LOW);
+  _state = false;
+  digitalWrite(_pin,LOW);
 }
 
 void LED::blink(long interval){
-  on();
-  delay(interval);
-  off();
-  delay(interval);
+  unsigned long currentTime = millis();
+  if(currentTime - _startTime >= interval){
+    if(_state == true){
+      off();
+    }else{
+      on();
+    }
+
+    _startTime = currentTime;
+  }
 }

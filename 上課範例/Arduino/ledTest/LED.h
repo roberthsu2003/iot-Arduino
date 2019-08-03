@@ -4,7 +4,9 @@
  #include <arduino.h>
 class LED{
   private:
-  byte pin = 0;
+  byte _pin = 0;
+  unsigned long _startTime;
+  boolean _state = false;
 
   public:
   LED(byte pinNum);
