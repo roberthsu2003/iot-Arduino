@@ -6,7 +6,9 @@ Timer timer;
 
 void setup() {
   // put your setup code here, to run once:
-  timer.every(1000,everyRun);
+  Serial.begin(115200);
+  timer.every(1000,every1000Run);
+  timer.every(2000,every2000Run);
 }
 
 void loop() {
@@ -16,6 +18,11 @@ void loop() {
   
 }
 
-void everyRun(){
+void every1000Run(){
     led13.autoBlink();
+    Serial.println("1000");
+}
+
+void every2000Run(){
+   Serial.println("2000");
 }
