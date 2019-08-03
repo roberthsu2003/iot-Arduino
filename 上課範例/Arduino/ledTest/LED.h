@@ -8,8 +8,12 @@ class LED{
 
   public:
   LED(byte pinNum);
+  //基本功能
   void on();
   void off();
+
+  //一閃一閃的功能
+  void blink(long interval);
   
 };
 #endif

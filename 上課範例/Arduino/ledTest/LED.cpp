@@ -10,3 +10,10 @@ void LED::on(){
 void LED::off(){
   digitalWrite(pin,LOW);
 }
+
+void LED::blink(long interval){
+  on();
+  delay(interval);
+  off();
+  delay(interval);
+}
