@@ -8,6 +8,9 @@ class Button{
     byte _pin;
 
   public:
-    Button(byte pinNum);  
+    //建構式
+    Button(byte pinNum);
+
+    boolean getCurrentState(); 
 };
 #endif
