@@ -11,3 +11,6 @@ https://youtu.be/ootuYXzzccY
 
 ### 2019_08_10_上午
 https://youtu.be/wyQKro250Ow
+
+### 2019_08_10_下午
+https://youtu.be/2wunPCDNHPo
