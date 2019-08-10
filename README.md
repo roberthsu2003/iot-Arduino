@@ -8,3 +8,6 @@ https://youtu.be/5J-HLD6lor0
 
 ### 2019_08_03_下午
 https://youtu.be/ootuYXzzccY
+
+### 2019_08_10_上午
+https://youtu.be/wyQKro250Ow
