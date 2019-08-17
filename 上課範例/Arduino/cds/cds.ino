@@ -1,6 +1,5 @@
 #define RELAY 8
-#define TRIGER 3
-#define ECHO 4
+
 
 boolean lightState = false;
 

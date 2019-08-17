@@ -1,5 +1,5 @@
 #include <Ultrasonic.h>
-#define RELAY 8
+#define RELAY 9
 #define TRIGER 3
 #define ECHO 4
 Ultrasonic ultrasonic(TRIGER, ECHO);
@@ -14,7 +14,7 @@ void loop() {
   // put your main code here, to run repeatedly:
   long microsec = ultrasonic.timing();
   float cmMsec = ultrasonic.convert(microsec, Ultrasonic::CM);
-  if(cmMsec <= 10){
+  if(cmMsec <= 20){
     if (lightState == false){
       digitalWrite(RELAY,HIGH);
       lightState = true;
