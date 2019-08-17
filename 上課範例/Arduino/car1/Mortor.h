@@ -12,11 +12,13 @@ class Mortor{
     int _modePin1;
     int _modePin2;
     int _speedPin;
-    int _speed = 0;
+    int _speed = 0; //0~10
     MortorMode _mode = STOP;//stop, foreward, backward
     
   public:
     Mortor(int modePin1, int modePin2, int speedPin);
+    void setSpeed(int speed);
+    void setMode(MortorMode mode);
 };
 
 #endif
