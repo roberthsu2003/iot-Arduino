@@ -11,12 +11,14 @@
 
 
 void Mortor::setSpeed(int speed){
-  int nowSpeed = 255 * ((float)speed/10);
+  _speed = speed;
+  int nowSpeed = 255 * ((float)_speed/10);
   analogWrite(_speedPin, nowSpeed);
 }
 
 void Mortor::setMode(MortorMode mode){
-  switch(mode){
+  _mode = mode;
+  switch(_mode){
     case STOP:
       digitalWrite(_modePin1,LOW);
       digitalWrite(_modePin2,LOW);
