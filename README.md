@@ -17,3 +17,8 @@ https://youtu.be/2wunPCDNHPo
 
 ### 2019_08_17
 https://youtu.be/LBlru6dzWb4
+
+
+### 2019_08_24
+https://youtu.be/kdXgPvxlq8M
+https://youtu.be/rNBuGwY7nAA
