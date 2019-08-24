@@ -3,21 +3,19 @@
  *      it under the terms of the GNU General Public License as published by
  *      the Free Software Foundation; either version 2 of the License, or
  *      (at your option) any later version.
- *      
+ *
  *      This program is distributed in the hope that it will be useful,
  *      but WITHOUT ANY WARRANTY; without even the implied warranty of
  *      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *      GNU General Public License for more details.
- *      
+ *
  *      You should have received a copy of the GNU General Public License
  *      along with this program; if not, write to the Free Software
  *      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  *      MA 02110-1301, USA.
  */
 
-
-
-/*  * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+/*  * * * * * * * * * * * * * * * * * * * * * * * * * * *
  Code by Simon Monk
  http://www.simonmonk.org
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -31,14 +29,13 @@
 
 #include "Timer.h"
 
-
-Timer::Timer()
+Timer::Timer(void)
 {
 }
 
-int Timer::every(long period, void (*callback)(), int repeatCount)
+int8_t Timer::every(unsigned long period, void (*callback)(), int repeatCount)
 {
-	int i = findFreeEventIndex();
+	int8_t i = findFreeEventIndex();
 	if (i == -1) return -1;
 
 	_events[i].eventType = EVENT_EVERY;
@@ -50,24 +47,24 @@ int Timer::every(long period, void (*callback)(), int repeatCount)
 	return i;
 }
 
-int Timer::every(long period, void (*callback)())
+int8_t Timer::every(unsigned long period, void (*callback)())
 {
 	return every(period, callback, -1); // - means forever
 }
 
-int Timer::after(long period, void (*callback)())
+int8_t Timer::after(unsigned long period, void (*callback)())
 {
 	return every(period, callback, 1);
 }
 
-int Timer::oscillate(int pin, long period, int startingValue, int repeatCount)
+int8_t Timer::oscillate(uint8_t pin, unsigned long period, uint8_t startingValue, int repeatCount)
 {
-	int i = findFreeEventIndex();
-	if (i == -1) return -1;
+	int8_t i = findFreeEventIndex();
+	if (i == NO_TIMER_AVAILABLE) return NO_TIMER_AVAILABLE;
 
 	_events[i].eventType = EVENT_OSCILLATE;
 	_events[i].pin = pin;
-	_events[i].period = period;	
+	_events[i].period = period;
 	_events[i].pinState = startingValue;
 	digitalWrite(pin, startingValue);
 	_events[i].repeatCount = repeatCount * 2; // full cycles not transitions
@@ -76,41 +73,66 @@ int Timer::oscillate(int pin, long period, int startingValue, int repeatCount)
 	return i;
 }
 
-int Timer::oscillate(int pin, long period, int startingValue)
+int8_t Timer::oscillate(uint8_t pin, unsigned long period, uint8_t startingValue)
 {
-	oscillate(pin, period, startingValue, -1); // forever
+	return oscillate(pin, period, startingValue, -1); // forever
 }
 
-int Timer::pulse(int pin, long period, int startingValue)
+/**
+ * This method will generate a pulse of !startingValue, occuring period after the
+ * call of this method and lasting for period. The Pin will be left in !startingValue.
+ */
+int8_t Timer::pulse(uint8_t pin, unsigned long period, uint8_t startingValue)
 {
-	oscillate(pin, period, startingValue, 1); // once
+	return oscillate(pin, period, startingValue, 1); // once
 }
 
-int Timer::stop(int id)
+/**
+ * This method will generate a pulse of startingValue, starting immediately and of
+ * length period. The pin will be left in the !startingValue state
+ */
+int8_t Timer::pulseImmediate(uint8_t pin, unsigned long period, uint8_t pulseValue)
 {
-	_events[id].eventType = EVENT_NONE;
+	int8_t id(oscillate(pin, period, pulseValue, 1));
+	// now fix the repeat count
+	if (id >= 0 && id < MAX_NUMBER_OF_EVENTS) {
+		_events[id].repeatCount = 1;
+	}
+	return id;
 }
 
-int Timer::update()
+
+void Timer::stop(int8_t id)
 {
-	for (int i = 0; i < MAX_NUMBER_OF_EVENTS; i++)
-	{
-		if (_events[i].eventType != EVENT_NONE)
-		{
-			_events[i].update();
-		}
+	if (id >= 0 && id < MAX_NUMBER_OF_EVENTS) {
+		_events[id].eventType = EVENT_NONE;
 	}
 }
 
-int Timer::findFreeEventIndex()
+void Timer::update(void)
 {
-	for (int i = 0; i < MAX_NUMBER_OF_EVENTS; i++)
+	unsigned long now = millis();
+	update(now);
+}
+
+void Timer::update(unsigned long now)
+{
+	for (int8_t i = 0; i < MAX_NUMBER_OF_EVENTS; i++)
+	{
+		if (_events[i].eventType != EVENT_NONE)
+		{
+			_events[i].update(now);
+		}
+	}
+}
+int8_t Timer::findFreeEventIndex(void)
+{
+	for (int8_t i = 0; i < MAX_NUMBER_OF_EVENTS; i++)
 	{
 		if (_events[i].eventType == EVENT_NONE)
 		{
 			return i;
 		}
 	}
-	return -1;
+	return NO_TIMER_AVAILABLE;
 }
-
