@@ -23,12 +23,19 @@ void setup() {
   Firebase.reconnectWiFi(true);
   Firebase.setMaxRetry(firebaseData, 3);
   Firebase.setMaxErrorQueue(firebaseData, 30);
+  
+  pinMode(D1,OUTPUT);
 }
 
 void loop() {
-  if (Firebase.getBool(firebaseData, "/led/D2")) {
-    
-      Serial.println(firebaseData.boolData());    
+  if (Firebase.getBool(firebaseData, "/led/D2")) {    
+      Serial.println(firebaseData.boolData());  
+      bool boolValue = firebaseData.boolData(); 
+      if (boolValue){
+        digitalWrite(D1,HIGH);
+      }else{
+        digitalWrite(D1,LOW);
+      }
   }
   
   delay(1000);
