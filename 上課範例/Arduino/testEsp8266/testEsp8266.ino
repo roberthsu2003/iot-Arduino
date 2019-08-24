@@ -3,7 +3,7 @@
 void setup() {
   Serial.begin(115200);
   Serial.println();
-  WiFi.begin("RobertIphone", "0926656000");
+  WiFi.begin("robert_hsu", "1234567890");
   Serial.print("Connecting");
   while (WiFi.status() != WL_CONNECTED)
   {
