@@ -20,8 +20,16 @@ void setup() {
 
 
   Firebase.begin("arduinofirebase-6d104.firebaseio.com", "z5lPWwjZLZuNNcUEelbJdiNaIvnR2Zfq49BuQBAa");
+  Firebase.reconnectWiFi(true);
+  Firebase.setMaxRetry(firebaseData, 3);
+  Firebase.setMaxErrorQueue(firebaseData, 30);
 }
 
 void loop() {
-
+  if (Firebase.getBool(firebaseData, "/led/D2")) {
+    
+      Serial.println(firebaseData.boolData());    
+  }
+  
+  delay(1000);
 }
