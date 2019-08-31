@@ -1,4 +1,7 @@
+#include "FirebaseESP8266.h"
 #include <ESP8266WiFi.h>
+
+FirebaseData firebaseData;
 void setup()
 {
   Serial.begin(115200);
@@ -13,7 +16,17 @@ void setup()
   Serial.println();
   Serial.print("Connected, IP address: ");
   Serial.println(WiFi.localIP());
+
+  Firebase.begin("arduinofirebase-6d104.firebaseio.com", "z5lPWwjZLZuNNcUEelbJdiNaIvnR2Zfq49BuQBAa");
+  Firebase.reconnectWiFi(true);
+  Firebase.setMaxErrorQueue(firebaseData, 30);
+  Firebase.setMaxRetry(firebaseData, 3);
 }
 
 
-void loop() {}
+void loop() {
+  if (Firebase.getBool(firebaseData,"/led/D2")){
+    Serial.println(firebaseData.boolData());
+  }
+  delay(1000);
+ }
