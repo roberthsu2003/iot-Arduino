@@ -2,6 +2,7 @@
 #define BTN D1
 
 bool btnState;
+bool currentState;
 unsigned long count = 0;
 
 void setup() {
@@ -9,14 +10,21 @@ void setup() {
   pinMode(IN1,OUTPUT);
   pinMode(BTN,INPUT);
   btnState = digitalRead(BTN);
+  Serial.begin(115200);
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  bool currentState = digitalRead(BTN);
+  currentState = digitalRead(BTN);
   if(currentState != btnState){
-    count += 1;
-    btnState = currentState;
+    delay(30);
+    currentState = digitalRead(BTN);
+    if (currentState != btnState){
+      count += 1;
+      Serial.println(count);
+      btnState = currentState;
+    }
+    
   }
 
   switch (count % 4){
