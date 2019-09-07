@@ -22,3 +22,6 @@ https://youtu.be/LBlru6dzWb4
 ### 2019_08_24
 https://youtu.be/kdXgPvxlq8M
 https://youtu.be/rNBuGwY7nAA
+
+### 2019_08_31
+https://youtu.be/AADaD_jnzgY
