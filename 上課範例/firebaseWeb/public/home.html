@@ -1,164 +1,180 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>RELAY控制</title>
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="index.html">Arduino 智慧家庭控制</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            
-            <li class="nav-item">
-              <a class="nav-link" href="relay.html">RELAY控制</a>
-            </li>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-            <li class="nav-item">
-                <a class="nav-link" href="lcd.html">LCD控制</a>
-            </li>
-            
-            <li class="nav-item">
-              <a class="nav-link" href="#">智慧監控</a>
-           </li>
+  <title>RELAY控制</title>
+</head>
 
-           <li class="nav-item">
-            <a class="nav-link" href="rfid.html">RFID控制</a>
-         </li>
-            
-          </ul>
-          
-        </div>
-    </nav>
-    <div class="container-fluid">
-        <div class="jumbotron jumbotron-fluid">
-            <div class="container">
-              <h1 class="display-6">智慧監控</h1>
-              <p class="lead">使用者端使用磁簧開關，溫溼度感測器，聲音感測器。監控家庭的門窗、溫度、濕度、聲音。由於監控數據皆上傳至雲端Firebase及時資料庫內，網頁版監控必需透過Firebase取得及時資料</p>
-            </div>
-          </div>
-      
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="index.html">Arduino 智慧家庭控制</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+
+        <li class="nav-item">
+          <a class="nav-link" href="relay.html">RELAY控制</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="lcd.html">LCD控制</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="#">智慧監控</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="rfid.html">RFID控制</a>
+        </li>
+
+      </ul>
+
+    </div>
+  </nav>
+  <div class="container-fluid">
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-6">智慧監控</h1>
+        <p class="lead">使用者端使用磁簧開關，溫溼度感測器，聲音感測器。監控家庭的門窗、溫度、濕度、聲音。由於監控數據皆上傳至雲端Firebase及時資料庫內，網頁版監控必需透過Firebase取得及時資料</p>
+      </div>
     </div>
 
-    <div class="container">
-        <div class="row">
-          <div class="col-sm">
-            <div class="card mb-5">
-                <img class="card-img-top" src="images/213_1.png" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">磁簧開關模組</h5>
-                  <p class="card-text"> 磁簧開關為一磁感應元件，常為某種設備欲定位、計次、了解設備目前狀態而設置，也廣泛使用於
-                    安全監控上，一般由一方磁鐵裝置;另一方為磁簧感應器搭配，可垂直方向感應或水平方向感應。</p>
-                    <button type="button" class="btn btn-primary">
-                        目前窗戶狀態:<span class="badge badge-light" id="windowState">開</span>
-                    </button>
-                </div>
-              </div>
-          </div>
-          
-          <div class="col-sm">
-            <div class="card mb-5" >
-                <img class="card-img-top" src="images/htu21-D.png" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">溫溼度感測器</h5>
-                  <p class="card-text">HTU21D 超小體積的 I2C 溫濕度數位輸出模組，是基於法國 Humirel 公司高性能的溫濕度感應元件 HTU21D 設計而成。HTU21D 溫濕度感測器的尺寸僅為長寬 3x3mm(LxW)，高度 1.1mm，提供標準的 I2C 數位輸出格式、寬的工作電壓範圍、極低的功耗，以及具有很好的溫濕度精度範圍。因此 HTU21D 溫 濕度數位輸出模組是具有良好的品質、快的回應速度、抗干擾能力強且性能優良的產品。
-                    􏰀 感測器重要參數:            
-                    HTU21D 同時可以和瑞士的 SHT20、SHT21 實現完全相容，硬體接腳上可以實現 Pin to Pin，無需修
-                    改電路板。軟體程式方面也和瑞士的 SHT20、SHT21 相同，可以實現相容替換，無需做出任何修改。</p>
-                    <button type="button" class="btn btn-primary">
-                        目前溫度: <span class="badge badge-light" id="temperatureState">25.5</span>
-                    </button>
-                    <button type="button" class="btn btn-primary">
-                        目前濕度: <span class="badge badge-light" id="humidityState">54%</span>
-                    </button>
-                    
-                </div>
-              </div>
-          </div>
+  </div>
 
-          <div class="col-sm">
-            <div class="card mb-5" >
-                <img class="card-img-top" src="images/sound.png" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">聲音感測器</h5>
-                  <p class="card-text">此聲音感測器可偵測聲音大小，其內設計放大電路(LM386)並可調整其增益(Gain) ，當數值 變化很小時可用起子調整其增益/放大倍數，因此模組輸出類比訊號，所以可接至 Arduino 類比腳位(A0 ~ A5) ，利用 analogRead 指令讀取音量大小，並送至 LCD Display 或電腦的 串列埠視窗(Serial Monitor) 顯示</p>
-                  <button type="button" class="btn btn-primary">
-                    目前音量 <span class="badge badge-light" id="soundState">356</span>
-                  </button>
-                  <div class="progress mt-3">
-                    <div class="progress-bar" role="progressbar" style="width: 10%;" aria-valuenow="500" aria-valuemin="0" aria-valuemax="1023" id="soundBarState">10%</div>
-                  </div>
-                </div>
-              </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm">
+        <div class="card mb-5">
+          <img class="card-img-top" src="images/213_1.png" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">磁簧開關模組</h5>
+            <p class="card-text"> 磁簧開關為一磁感應元件，常為某種設備欲定位、計次、了解設備目前狀態而設置，也廣泛使用於
+              安全監控上，一般由一方磁鐵裝置;另一方為磁簧感應器搭配，可垂直方向感應或水平方向感應。</p>
+            <button type="button" class="btn btn-primary">
+              目前窗戶狀態:<span class="badge badge-light" id="windowState">開</span>
+            </button>
           </div>
-          
         </div>
       </div>
 
+      <div class="col-sm">
+        <div class="card mb-5">
+          <img class="card-img-top" src="images/htu21-D.png" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">溫溼度感測器</h5>
+            <p class="card-text">HTU21D 超小體積的 I2C 溫濕度數位輸出模組，是基於法國 Humirel 公司高性能的溫濕度感應元件 HTU21D 設計而成。HTU21D 溫濕度感測器的尺寸僅為長寬
+              3x3mm(LxW)，高度 1.1mm，提供標準的 I2C 數位輸出格式、寬的工作電壓範圍、極低的功耗，以及具有很好的溫濕度精度範圍。因此 HTU21D 溫
+              濕度數位輸出模組是具有良好的品質、快的回應速度、抗干擾能力強且性能優良的產品。
+              􏰀 感測器重要參數:
+              HTU21D 同時可以和瑞士的 SHT20、SHT21 實現完全相容，硬體接腳上可以實現 Pin to Pin，無需修
+              改電路板。軟體程式方面也和瑞士的 SHT20、SHT21 相同，可以實現相容替換，無需做出任何修改。</p>
+            <button type="button" class="btn btn-primary">
+              目前溫度: <span class="badge badge-light" id="temperatureState">25.5</span>
+            </button>
+            <button type="button" class="btn btn-primary">
+              目前濕度: <span class="badge badge-light" id="humidityState">54%</span>
+            </button>
 
-    
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm">
+        <div class="card mb-5">
+          <img class="card-img-top" src="images/sound.png" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">聲音感測器</h5>
+            <p class="card-text">此聲音感測器可偵測聲音大小，其內設計放大電路(LM386)並可調整其增益(Gain) ，當數值 變化很小時可用起子調整其增益/放大倍數，因此模組輸出類比訊號，所以可接至
+              Arduino 類比腳位(A0 ~ A5) ，利用 analogRead 指令讀取音量大小，並送至 LCD Display 或電腦的 串列埠視窗(Serial Monitor) 顯示</p>
+            <button type="button" class="btn btn-primary">
+              目前音量 <span class="badge badge-light" id="soundState">356</span>
+            </button>
+            <div class="progress mt-3">
+              <div class="progress-bar" role="progressbar" style="width: 10%;" aria-valuenow="500" aria-valuemin="0"
+                aria-valuemax="1023" id="soundBarState">10%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
 
 
 
-      
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-    <script>
-        // Initialize Firebase
-        var config = {
-          apiKey: "AIzaSyCBa3cc1A9mlWzDnG_0e9ltIcZhOWiA-tk",
-          authDomain: "arduinofirebase-6d104.firebaseapp.com",
-          databaseURL: "https://arduinofirebase-6d104.firebaseio.com",
-          projectId: "arduinofirebase-6d104",
-          storageBucket: "arduinofirebase-6d104.appspot.com",
-          messagingSenderId: "775007261514"
-        };
-        firebase.initializeApp(config);
-        var database = firebase.database();
-        var homeRef = database.ref('home');
 
-        $(document).ready(function(){
-            homeRef.on('value',function(snapshot){
-                var homeValue = snapshot.val();
-                //windowState
-                var windowValue = homeValue.window;
-                var windowState = windowValue ? "開" : "關" ;
-                $("#windowState").text(windowState);
 
-                //temperatureState
-                var temperature = homeValue.temp;
-                var tempFormatValue = Math.round(temperature*1000)/1000;
-                $("#temperatureState").text(tempFormatValue + "c");
 
-                //humidityState
-                var humidity = homeValue.humidity;
-                var humidityFormatValue = Math.round(humidity*1000)/1000;
-                $("#humidityState").text(humidityFormatValue + "%");
 
-                //soundState
-                var sound = homeValue.sound;                
-                $("#soundState").text(sound);
-                //soundBar
-                soundPerson = Math.round(sound / 1023 * 100);
-                $("#soundBarState").text(soundPerson + "%").attr("aria-valuenow",sound).css("width",soundPerson+"%");
-            });
-        });
-          
-      </script>
-  </body>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+  <script>
+    // Initialize Firebase
+    var firebaseConfig = {
+      apiKey: "AIzaSyCBa3cc1A9mlWzDnG_0e9ltIcZhOWiA-tk",
+      authDomain: "arduinofirebase-6d104.firebaseapp.com",
+      databaseURL: "https://arduinofirebase-6d104.firebaseio.com",
+      projectId: "arduinofirebase-6d104",
+      storageBucket: "arduinofirebase-6d104.appspot.com",
+      messagingSenderId: "775007261514",
+      appId: "1:775007261514:web:1d7170ca43c85472"
+    };
+    firebase.initializeApp(firebaseConfig);
+    var database = firebase.database();
+    var homeRef = database.ref('home');
+
+    $(document).ready(function () {
+      homeRef.on('value', function (snapshot) {
+        var homeValue = snapshot.val();
+        //windowState
+        var windowValue = homeValue.window;
+        var windowState = windowValue ? "開" : "關";
+        $("#windowState").text(windowState);
+
+        //temperatureState
+        var temperature = homeValue.temp;
+        var tempFormatValue = Math.round(temperature * 1000) / 1000;
+        $("#temperatureState").text(tempFormatValue + "c");
+
+        //humidityState
+        var humidity = homeValue.humidity;
+        var humidityFormatValue = Math.round(humidity * 1000) / 1000;
+        $("#humidityState").text(humidityFormatValue + "%");
+
+        //soundState
+        var sound = homeValue.sound;
+        $("#soundState").text(sound);
+        //soundBar
+        soundPerson = Math.round(sound / 1023 * 100);
+        $("#soundBarState").text(soundPerson + "%").attr("aria-valuenow", sound).css("width", soundPerson + "%");
+      });
+    });
+
+  </script>
+</body>
+
 </html>

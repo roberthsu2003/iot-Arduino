@@ -2,11 +2,12 @@
 #include "SparkFunHTU21D.h"
 #include "FirebaseESP8266.h"
 #include <ESP8266WiFi.h>
-
+#define window D3
 
 //Create an instance of the object
 HTU21D myHumidity;
 FirebaseData firebaseData;
+
 
  
 
@@ -33,6 +34,9 @@ void setup() {
   Firebase.reconnectWiFi(true);
   Firebase.setMaxRetry(firebaseData, 3);
   Firebase.setMaxErrorQueue(firebaseData, 30);
+
+  //window
+  pinMode(window,INPUT_PULLUP);
 }
 
 void loop() {
@@ -61,6 +65,9 @@ void loop() {
   }else{
     Serial.println("temperature false");
   }
+  bool windowValue = digitalRead(window);
+  Serial.print("window:");
+  Serial.println(windowValue);
   delay(1000);
 }
 
