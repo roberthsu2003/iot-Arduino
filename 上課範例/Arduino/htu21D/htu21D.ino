@@ -66,6 +66,11 @@ void loop() {
     Serial.println("temperature false");
   }
   bool windowValue = digitalRead(window);
+  if (Firebase.setBool(firebaseData,"/home/window",windowValue) == true){
+    Serial.println("window success");
+  }else{
+    Serial.println("window false");
+  }
   Serial.print("window:");
   Serial.println(windowValue);
   delay(1000);
