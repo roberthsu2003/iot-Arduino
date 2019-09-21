@@ -38,8 +38,8 @@ void setup() {
 void loop() {
   float humd = myHumidity.readHumidity();
   float temp = myHumidity.readTemperature();
-  float humdValue = floorf(humd * 100) / 100;
-  float tempValue = floorf(temp * 100) / 100;
+  float humdValue = round(humd);
+  float tempValue = round(temp);
   Serial.print("Time:");
   Serial.print(millis());
   Serial.print(" Temperature:");
@@ -63,3 +63,10 @@ void loop() {
   }
   delay(1000);
 }
+
+float round(float var) 
+{ 
+    
+    float value = (int)(var * 100 + .5); 
+    return (float)value / 100; 
+} 
