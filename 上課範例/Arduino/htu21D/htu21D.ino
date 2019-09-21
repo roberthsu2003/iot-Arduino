@@ -2,12 +2,15 @@
 #include "SparkFunHTU21D.h"
 #include "FirebaseESP8266.h"
 #include <ESP8266WiFi.h>
+#include "Timer.h"
 #define window D3
+#define sound A0
+
 
 //Create an instance of the object
 HTU21D myHumidity;
 FirebaseData firebaseData;
-
+Timer timer;
 
  
 
@@ -37,9 +40,16 @@ void setup() {
 
   //window
   pinMode(window,INPUT_PULLUP);
+
+  timer.every(1000,doSomeThing);
 }
 
 void loop() {
+  
+  timer.update();
+}
+
+void doSomeThing(){
   float humd = myHumidity.readHumidity();
   float temp = myHumidity.readTemperature();
   float humdValue = round(humd);
@@ -65,6 +75,7 @@ void loop() {
   }else{
     Serial.println("temperature false");
   }
+  //window
   bool windowValue = digitalRead(window);
   if (Firebase.setBool(firebaseData,"/home/window",windowValue) == true){
     Serial.println("window success");
@@ -73,7 +84,16 @@ void loop() {
   }
   Serial.print("window:");
   Serial.println(windowValue);
-  delay(1000);
+
+  //sound
+  int soundValue = analogRead(sound);
+  if (Firebase.setInt(firebaseData,"/home/sound",soundValue) == true){
+    Serial.println("sound success");
+  }else{
+    Serial.println("sound false");
+  }
+  Serial.print("sound:");
+  Serial.println(soundValue);
 }
 
 float round(float var) 
