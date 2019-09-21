@@ -17,7 +17,7 @@ void setup() {
   myHumidity.begin();
   
   //wifi
-  WiFi.begin("robert_hsu", "1234567890");
+  WiFi.begin("0gm4", "2773524311");
   Serial.print("Connecting");
   while (WiFi.status() != WL_CONNECTED)
   {
@@ -38,24 +38,25 @@ void setup() {
 void loop() {
   float humd = myHumidity.readHumidity();
   float temp = myHumidity.readTemperature();
-
+  float humdValue = floorf(humd * 100) / 100;
+  float tempValue = floorf(temp * 100) / 100;
   Serial.print("Time:");
   Serial.print(millis());
   Serial.print(" Temperature:");
-  Serial.print(temp, 1);
+  Serial.print(tempValue, 5);
   Serial.print("C");
   Serial.print(" Humidity:");
-  Serial.print(humd, 1);
+  Serial.print(humdValue, 5);
   Serial.print("%");
 
   Serial.println();
-  if (Firebase.setDouble(firebaseData,"/home/humidity",humd) == true){
+  if (Firebase.setDouble(firebaseData,"/home/humidity",humdValue) == true){
     Serial.println("humidity success");
   }else{
     Serial.println("humidity false");
   }
 
-  if (Firebase.setDouble(firebaseData,"/home/temp",temp) == true){
+  if (Firebase.setDouble(firebaseData,"/home/temp",tempValue) == true){
     Serial.println("temperature success");
   }else{
     Serial.println("temperature false");
