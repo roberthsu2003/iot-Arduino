@@ -11,7 +11,7 @@ void setup() {
   Serial.println("HTU21D Example!");  
   myHumidity.begin();
 
-  WiFi.begin("network-name", "pass-to-network");
+  WiFi.begin("robert_hsu", "1234567890");
   Serial.print("Connecting");
   while (WiFi.status() != WL_CONNECTED)
   {
