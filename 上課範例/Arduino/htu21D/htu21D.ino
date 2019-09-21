@@ -11,7 +11,8 @@
 HTU21D myHumidity;
 FirebaseData firebaseData;
 Timer timer;
-
+//sound
+int averageSound = 0;
  
 
 void setup() {
@@ -41,6 +42,7 @@ void setup() {
   //window
   pinMode(window,INPUT_PULLUP);
 
+//sound
   timer.every(1000,doSomeThing);
 }
 
@@ -50,6 +52,7 @@ void loop() {
 }
 
 void doSomeThing(){
+  timer.every(100,getSound);
   float humd = myHumidity.readHumidity();
   float temp = myHumidity.readTemperature();
   float humdValue = round(humd);
@@ -86,7 +89,8 @@ void doSomeThing(){
   Serial.println(windowValue);
 
   //sound
-  int soundValue = analogRead(sound);
+  int soundValue = averageSound;
+  
   if (Firebase.setInt(firebaseData,"/home/sound",soundValue) == true){
     Serial.println("sound success");
   }else{
@@ -102,3 +106,13 @@ float round(float var)
     float value = (int)(var * 100 + .5); 
     return (float)value / 100; 
 } 
+
+
+void getSound(){
+  int soundValue = analogRead(sound);
+ 
+    averageSound += soundValue;
+    averageSound /= 2;
+  
+   
+}
