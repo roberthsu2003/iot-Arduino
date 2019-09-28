@@ -31,7 +31,7 @@ void setup() {
 
    //wifi
 
-  WiFi.begin("0gm4", "2773524311");
+  WiFi.begin("robert_hsu", "1234567890");
   Serial.print("Connecting");
   while (WiFi.status() != WL_CONNECTED)
   {
@@ -59,10 +59,14 @@ void loop() {
 }
 
 void getFirebaseData(){
+    lcd.clear();
    if (Firebase.getString(firebaseData, "/lcd/line1")) {
 
     if (firebaseData.dataType() == "string") {
       Serial.println(firebaseData.stringData());
+      
+      lcd.setCursor(0, 0); // 設定游標位置在第一行行首
+      lcd.print(firebaseData.stringData());
     }
 
   } else {
@@ -74,6 +78,8 @@ void getFirebaseData(){
 
     if (firebaseData.dataType() == "string") {
       Serial.println(firebaseData.stringData());
+      lcd.setCursor(0, 1); // 設定游標位置在第一行行首
+      lcd.print(firebaseData.stringData());
     }
 
   } else {
