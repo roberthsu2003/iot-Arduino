@@ -122,7 +122,7 @@ void loop() {
         FirebaseJson json;
         json.addString("cardID", cardid);
 
-        if (Firebase.pushJSON(firebaseData, "/home/rfid", json)) {
+        if (Firebase.pushJSON(firebaseData, "/rfid/records", json)) {
 
           Serial.println(firebaseData.dataPath());
 
