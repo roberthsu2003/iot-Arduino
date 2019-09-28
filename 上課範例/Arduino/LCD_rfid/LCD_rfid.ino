@@ -130,7 +130,7 @@ void loop() {
 
           Serial.println(firebaseData.dataPath() + "/" + firebaseData.pushName());
           String appendPath = firebaseData.dataPath() + "/" + firebaseData.pushName();
-          Firebase.pushTimestamp(firebaseData,appendPath);
+          Firebase.setTimestamp(firebaseData,appendPath + "/timeStamp");
 
         } else {
           Serial.println(firebaseData.errorReason());
