@@ -4,10 +4,12 @@
 #include <LiquidCrystal_I2C.h>
 #include <SPI.h>
 #include <RFID.h>
-
+#include "FirebaseESP8266.h"
+#include <ESP8266WiFi.h>
 
 #define SS_PIN D8
 #define RST_PIN D0
+
 RFID rfid(SS_PIN, RST_PIN);
 LiquidCrystal_I2C lcd(0x27, 2, 1, 0, 4, 5, 6, 7, 3, POSITIVE);  // 設定 LCD I2C 位址
 
@@ -16,7 +18,9 @@ int serNum1;
 int serNum2;
 int serNum3;
 int serNum4;
-    
+
+FirebaseData firebaseData;
+
 void setup() {
   Serial.begin(115200);  // 用於手動輸入文字
   lcd.begin(16, 2);      // 初始化 LCD，一行 16 的字元，共 2 行，預設開啟背光
@@ -41,8 +45,32 @@ void setup() {
  //rfif
  SPI.begin();
  rfid.init();
+
+ //wifi
+   
+  WiFi.begin("0gm4", "2773524311");
+  Serial.print("Connecting");
+  while (WiFi.status() != WL_CONNECTED)
+  {
+    delay(500);
+    Serial.print(".");
+  }
+  Serial.println();
+  Serial.print("Connected, IP address: ");
+  Serial.println(WiFi.localIP());
+
+
+  //firebase
+ Firebase.begin("arduinofirebase-6d104.firebaseio.com", "z5lPWwjZLZuNNcUEelbJdiNaIvnR2Zfq49BuQBAa");
+ Firebase.reconnectWiFi(true);
+ Firebase.setMaxRetry(firebaseData, 3);
+ Firebase.setMaxErrorQueue(firebaseData, 30);
 }
 
+
+ 
+
+ 
 void loop() {
   if(rfid.isCard()){
     if(rfid.readCardSerial()){
