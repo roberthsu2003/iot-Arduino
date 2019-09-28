@@ -50,7 +50,7 @@ void setup() {
   Firebase.setMaxErrorQueue(firebaseData, 30);
 
   //timer
-  t.every(500,getFirebaseData);
+  t.every(1000,getFirebaseData);
 }
 
 void loop() {
@@ -59,5 +59,24 @@ void loop() {
 }
 
 void getFirebaseData(){
-  Serial.println("getData");
+   if (Firebase.getString(firebaseData, "/lcd/line1")) {
+
+    if (firebaseData.dataType() == "string") {
+      Serial.println(firebaseData.stringData());
+    }
+
+  } else {
+    Serial.println(firebaseData.errorReason());
+  }
+
+
+  if (Firebase.getString(firebaseData, "/lcd/line2")) {
+
+    if (firebaseData.dataType() == "string") {
+      Serial.println(firebaseData.stringData());
+    }
+
+  } else {
+    Serial.println(firebaseData.errorReason());
+  }
 }
