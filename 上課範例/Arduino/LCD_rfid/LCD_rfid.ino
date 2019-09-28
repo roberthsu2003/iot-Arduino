@@ -1,8 +1,6 @@
 //https://bitbucket.org/fmalpartida/new-liquidcrystal/downloads/
 
 #include <Wire.h>  // Arduino IDE 內建
-// LCD I2C Library，從這裡可以下載：
-// https://bitbucket.org/fmalpartida/new-liquidcrystal/downloads
 #include <LiquidCrystal_I2C.h>
 
 // Set the pins on the I2C chip used for LCD connections:
@@ -28,27 +26,10 @@ void setup() {
   delay(1000);
   lcd.setCursor(0, 1); // 設定游標位置在第二行行首
   lcd.print("Robert_HSU");
-  delay(8000);
-
-  // 告知使用者可以開始手動輸入訊息
-  lcd.clear();
-  lcd.setCursor(0, 0);
-  lcd.print("Use Serial Mon");
-  lcd.setCursor(0, 1);
-  lcd.print("Type to display");
+ 
 }
 
 void loop() {
-  // 當使用者手動輸入訊息
-  if (Serial.available()) {
-    // 等待一小段時間，確認資料都接收下來了
-    delay(100);
-    // 清除舊訊息
-    lcd.clear();
-    // 讀取新訊息
-    while (Serial.available() > 0) {
-      // 將訊息顯示在 LCD 上
-      lcd.write(Serial.read());
-    }
-  }
+  
+  
 }
