@@ -26,7 +26,7 @@ void setup() {
   lcd.begin(16, 2);      // 初始化 LCD，一行 16 的字元，共 2 行，預設開啟背光
 
   // 閃爍三次
-  for(int i = 0; i < 3; i++) {
+  for (int i = 0; i < 3; i++) {
     lcd.backlight(); // 開啟背光
     delay(250);
     lcd.noBacklight(); // 關閉背光
@@ -42,12 +42,12 @@ void setup() {
   lcd.print("Robert_HSU");
 
 
- //rfif
- SPI.begin();
- rfid.init();
+  //rfif
+  SPI.begin();
+  rfid.init();
 
- //wifi
-   
+  //wifi
+
   WiFi.begin("0gm4", "2773524311");
   Serial.print("Connecting");
   while (WiFi.status() != WL_CONNECTED)
@@ -61,24 +61,24 @@ void setup() {
 
 
   //firebase
- Firebase.begin("arduinofirebase-6d104.firebaseio.com", "z5lPWwjZLZuNNcUEelbJdiNaIvnR2Zfq49BuQBAa");
- Firebase.reconnectWiFi(true);
- Firebase.setMaxRetry(firebaseData, 3);
- Firebase.setMaxErrorQueue(firebaseData, 30);
+  Firebase.begin("arduinofirebase-6d104.firebaseio.com", "z5lPWwjZLZuNNcUEelbJdiNaIvnR2Zfq49BuQBAa");
+  Firebase.reconnectWiFi(true);
+  Firebase.setMaxRetry(firebaseData, 3);
+  Firebase.setMaxErrorQueue(firebaseData, 30);
 }
 
 
- 
 
- 
+
+
 void loop() {
-  if(rfid.isCard()){
-    if(rfid.readCardSerial()){
-      if (rfid.serNum[0] != serNum0 
-      && rfid.serNum[1] != serNum1 
-      && rfid.serNum[2] != serNum2 
-      && rfid.serNum[3] != serNum3 
-      && rfid.serNum[4] != serNum4){
+  if (rfid.isCard()) {
+    if (rfid.readCardSerial()) {
+      if (rfid.serNum[0] != serNum0
+          && rfid.serNum[1] != serNum1
+          && rfid.serNum[2] != serNum2
+          && rfid.serNum[3] != serNum3
+          && rfid.serNum[4] != serNum4) {
         Serial.println(" ");
         Serial.println("Card found");
         serNum0 = rfid.serNum[0];
@@ -87,7 +87,7 @@ void loop() {
         serNum3 = rfid.serNum[3];
         serNum4 = rfid.serNum[4];
         lcd.clear();
-        String cardid = String(serNum0) + "-" + String(serNum1) + "-" + String(serNum2) + "-" + String(serNum3)+ "-" + String(serNum4) ;
+        String cardid = String(serNum0) + "-" + String(serNum1) + "-" + String(serNum2) + "-" + String(serNum3) + "-" + String(serNum4) ;
         lcd.setCursor(0, 0); // 設定游標位置在第一行行首
         lcd.print("cardID:");
         delay(500);
@@ -95,34 +95,54 @@ void loop() {
         lcd.print(cardid);
         Serial.println("Cardnumber:");
         Serial.print("Dec: ");
-        Serial.print(rfid.serNum[0],DEC);
+        Serial.print(rfid.serNum[0], DEC);
         Serial.print(", ");
-        Serial.print(rfid.serNum[1],DEC);
+        Serial.print(rfid.serNum[1], DEC);
         Serial.print(", ");
-        Serial.print(rfid.serNum[2],DEC);
+        Serial.print(rfid.serNum[2], DEC);
         Serial.print(", ");
-        Serial.print(rfid.serNum[3],DEC);
+        Serial.print(rfid.serNum[3], DEC);
         Serial.print(", ");
-        Serial.print(rfid.serNum[4],DEC);
+        Serial.print(rfid.serNum[4], DEC);
         Serial.println(" ");
 
         Serial.print("Hex: ");
-        Serial.print(rfid.serNum[0],HEX);
+        Serial.print(rfid.serNum[0], HEX);
         Serial.print(", ");
-        Serial.print(rfid.serNum[1],HEX);
+        Serial.print(rfid.serNum[1], HEX);
         Serial.print(", ");
-        Serial.print(rfid.serNum[2],HEX);
+        Serial.print(rfid.serNum[2], HEX);
         Serial.print(", ");
-        Serial.print(rfid.serNum[3],HEX);
+        Serial.print(rfid.serNum[3], HEX);
         Serial.print(", ");
-        Serial.print(rfid.serNum[4],HEX);
+        Serial.print(rfid.serNum[4], HEX);
         Serial.println(" ");
+
+        //Firebase
+        FirebaseJson json;
+        json.addString("cardID", cardid);
+
+        if (Firebase.pushJSON(firebaseData, "/home/rfid", json)) {
+
+          Serial.println(firebaseData.dataPath());
+
+          Serial.println(firebaseData.pushName());
+
+          Serial.println(firebaseData.dataPath() + "/" + firebaseData.pushName());
+          String appendPath = firebaseData.dataPath() + "/" + firebaseData.pushName();
+          Firebase.pushTimestamp(firebaseData,appendPath);
+
+        } else {
+          Serial.println(firebaseData.errorReason());
+        }
+
+        //end firebase
 
       } else
       {
-         Serial.print(".");
+        Serial.print(".");
       }
     }
   }
-  
+
 }
