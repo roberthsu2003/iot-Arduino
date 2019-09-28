@@ -58,7 +58,13 @@ void loop() {
         serNum2 = rfid.serNum[2];
         serNum3 = rfid.serNum[3];
         serNum4 = rfid.serNum[4];
-
+        lcd.clear();
+        String cardid = String(serNum0) + "-" + String(serNum1) + "-" + String(serNum2) + "-" + String(serNum3)+ "-" + String(serNum4) ;
+        lcd.setCursor(0, 0); // 設定游標位置在第一行行首
+        lcd.print("cardID:");
+        delay(500);
+        lcd.setCursor(0, 1); // 設定游標位置在第二行行首
+        lcd.print(cardid);
         Serial.println("Cardnumber:");
         Serial.print("Dec: ");
         Serial.print(rfid.serNum[0],DEC);
