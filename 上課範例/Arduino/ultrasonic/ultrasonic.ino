@@ -3,7 +3,8 @@
 typedef enum Direction {
   FRONT,
   LEFT,
-  RIGHT
+  RIGHT,
+  BACK
 } Direction;
 
 Ultrasonic front(3, 4);
@@ -27,6 +28,9 @@ void loop() {
     case RIGHT:
      Serial.println("right");
       break;
+    case BACK:
+      Serial.println("back");
+      break;
       
   }
 }
@@ -35,20 +39,29 @@ Direction ultrasonicSensor() {
   // put your main code here, to run repeatedly:
   long frontMillsecon = front.timing();
   float frontDistance = front.convert(frontMillsecon, Ultrasonic::CM);
-  Serial.print("Front-->");
-  Serial.println(frontDistance);
+  //Serial.print("Front-->");
+  //Serial.println(frontDistance);
   //left
   long leftMillsecon = left.timing();
   float leftDistance = front.convert(leftMillsecon, Ultrasonic::CM);
-  Serial.print("Left-->");
-  Serial.println(leftDistance);
+  //Serial.print("Left-->");
+  //Serial.println(leftDistance);
 
   //right
   long rightMillsecon = right.timing();
   float rightDistance = right.convert(rightMillsecon, Ultrasonic::CM);
-  Serial.print("Right-->");
-  Serial.println(rightDistance);
+  //Serial.print("Right-->");
+  //Serial.println(rightDistance);
 
   delay(1000);
-  return FRONT;
+  if (frontDistance > 50){
+    return FRONT;
+  }else if (leftDistance > 50){
+    return LEFT;
+  }else if(rightDistance > 50){
+    return RIGHT;
+  }else{
+    return BACK;
+  }
+  
 }
