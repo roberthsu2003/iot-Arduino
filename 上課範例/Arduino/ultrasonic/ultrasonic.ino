@@ -1,6 +1,8 @@
 #include "Ultrasonic.h"
 
 Ultrasonic front(3,4);
+Ultrasonic left(A1,A2);
+ULtrasonic right(A3,A4);
 
 void setup() {
   // put your setup code here, to run once:
