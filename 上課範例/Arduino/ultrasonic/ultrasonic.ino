@@ -1,5 +1,11 @@
 #include "Ultrasonic.h"
 
+typedef enum Direction {
+  FRONT,
+  LEFT,
+  RIGHT
+} Direction;
+
 Ultrasonic front(3, 4);
 Ultrasonic right(A1, A2);
 Ultrasonic left(A3, A4);
@@ -10,11 +16,22 @@ void setup() {
 }
 
 void loop() {
-ultrasonicSensor();
-
+  Direction direction = ultrasonicSensor();
+  switch (direction){
+    case FRONT:
+      Serial.println("Front");
+      break;
+    case LEFT:
+      Serial.println("left");
+      break;
+    case RIGHT:
+     Serial.println("right");
+      break;
+      
+  }
 }
 
-void ultrasonicSensor() {
+Direction ultrasonicSensor() {
   // put your main code here, to run repeatedly:
   long frontMillsecon = front.timing();
   float frontDistance = front.convert(frontMillsecon, Ultrasonic::CM);
@@ -33,4 +50,5 @@ void ultrasonicSensor() {
   Serial.println(rightDistance);
 
   delay(1000);
+  return FRONT;
 }
