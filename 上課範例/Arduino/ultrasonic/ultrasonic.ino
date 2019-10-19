@@ -1,5 +1,11 @@
 #include "Ultrasonic.h"
 #include "Timer.h"
+#define MOTORRIGHT1 12
+#define MOTORRIGHT2 11
+#define MOTORLEFT1 10
+#define MOTORLEFT2 9
+#define RIGHTPOWER 5
+#define LEFTPOWER 6
 
 typedef enum Direction {
   FRONT,
@@ -12,6 +18,7 @@ Ultrasonic front(3, 4);
 Ultrasonic right(A1, A2);
 Ultrasonic left(A3, A4);
 Timer customTime;
+
 
 void setup() {
   // put your setup code here, to run once:
@@ -28,14 +35,18 @@ void loopAgain(){
   switch (direction){
     case FRONT:
       Serial.println("Front");
+      goHead();
       break;
     case LEFT:
       Serial.println("left");
+      goLeft();
       break;
     case RIGHT:
-     Serial.println("right");
+      goRight();
+      Serial.println("right");
       break;
     case BACK:
+      goBack();
       Serial.println("back");
       break;
       
@@ -71,4 +82,39 @@ Direction ultrasonicSensor() {
     return BACK;
   }
   
+}
+
+void goHead(){
+  digitalWrite(MOTORRIGHT1,HIGH);
+  digitalWrite(MOTORRIGHT2,LOW);
+  digitalWrite(MOTORLEFT1,HIGH);
+  digitalWrite(MOTORLEFT2,LOW);
+  analogWrite(RIGHTPOWER,100);
+  analogWrite(LEFTPOWER,100);
+}
+
+void goLeft(){
+  digitalWrite(MOTORRIGHT1,HIGH);
+  digitalWrite(MOTORRIGHT2,LOW);
+  digitalWrite(MOTORLEFT1,HIGH);
+  digitalWrite(MOTORLEFT2,LOW);
+  analogWrite(RIGHTPOWER,130);
+  analogWrite(LEFTPOWER,100);
+}
+
+void goRight(){
+  digitalWrite(MOTORRIGHT1,HIGH);
+  digitalWrite(MOTORRIGHT2,LOW);
+  digitalWrite(MOTORLEFT1,HIGH);
+  digitalWrite(MOTORLEFT2,LOW);
+  analogWrite(RIGHTPOWER,100);
+  analogWrite(LEFTPOWER,130);
+}
+void goBack(){
+  digitalWrite(MOTORRIGHT1,LOW);
+  digitalWrite(MOTORRIGHT2,HIGH);
+  digitalWrite(MOTORLEFT1,LOW);
+  digitalWrite(MOTORLEFT2,HIGH);
+  analogWrite(RIGHTPOWER,100);
+  analogWrite(LEFTPOWER,100);
 }
