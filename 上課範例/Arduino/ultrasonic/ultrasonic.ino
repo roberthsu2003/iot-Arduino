@@ -1,4 +1,5 @@
 #include "Ultrasonic.h"
+#include "Timer.h"
 
 typedef enum Direction {
   FRONT,
@@ -10,13 +11,19 @@ typedef enum Direction {
 Ultrasonic front(3, 4);
 Ultrasonic right(A1, A2);
 Ultrasonic left(A3, A4);
+Timer customTime;
 
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(115200);
+  customTime.every(100,loopAgain);
 }
 
 void loop() {
+  customTime.update();
+}
+
+void loopAgain(){
   Direction direction = ultrasonicSensor();
   switch (direction){
     case FRONT:
@@ -53,7 +60,7 @@ Direction ultrasonicSensor() {
   //Serial.print("Right-->");
   //Serial.println(rightDistance);
 
-  delay(1000);
+  
   if (frontDistance > 50){
     return FRONT;
   }else if (leftDistance > 50){
