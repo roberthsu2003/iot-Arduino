@@ -34,3 +34,7 @@ https://youtu.be/OD0iuJJ-ADg
 
 ### 2019_09_28_iot
 https://youtu.be/cctAi-r3QhM
+
+
+### 2019_10_19_iot
+https://youtu.be/dNbtM5GCCGI
